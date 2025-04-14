@@ -13,7 +13,7 @@ function SignUp() {
   };
 
   return (
-    <div className="container">
+    <div className="container-auth">
       <h2>Sign Up</h2>
       <div className="input-box">
         <FaUser className="icon" />

@@ -32,7 +32,7 @@ const Hero = () => {
 
           {/* RIGHT */}
           <Col md={6} className="text-center text-md-start position-relative">
-            <div className="position-absolute w-100 h-100 bg-gradient-to-tr from-orange-600 to-red-500 rounded-circle blur-[120px] z-0"></div>
+            <div className="position-absolute w-100 h-100 bg-gradient-to-tr from-orange-600 to-red-500 rounded-circle blur-bg z-0"></div>
             <img
               src={fitMan}
               alt="Fit Man"
