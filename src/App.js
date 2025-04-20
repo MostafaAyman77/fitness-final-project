@@ -12,6 +12,10 @@ import Login from './Components/Auth/Login';
 import SignUp from './Components/Auth/signup';
 import Layout from "./Components/Layout";
 
+import BMICalculator from './Components/FitnessTools/BMI-calculator';
+import CalorieCalculator from './Components/FitnessTools/Calorie-calculator';
+import MacronutrientCalculator from './Components/FitnessTools/Macronutrient-calculator';
+import GoalSettingTool from './Components/FitnessTools/Goal-Setting-Tool';
 const routes = createBrowserRouter([{
   path: '/',
   element: <Layout/>,
@@ -31,6 +35,22 @@ const routes = createBrowserRouter([{
     {
       path: "signup",
       element: <SignUp />,
+    },
+    {
+      path: "bmi-calculator",
+      element: <BMICalculator />,
+    },
+    {
+      path: "calorie-calculator",
+      element: <CalorieCalculator />,
+    },
+    {
+      path: "macro-calculator-1",
+      element: <MacronutrientCalculator />,
+    },
+    {
+      path: "goal-setting",
+      element: <GoalSettingTool />,
     },
   ]
 }]);
