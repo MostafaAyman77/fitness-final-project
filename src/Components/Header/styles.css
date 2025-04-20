@@ -1,0 +1,16 @@
+.programs-dropdown .dropdown-menu {
+    background-color: #212529; /* Bootstrap's dark bg color */
+    border: none;
+    padding: 10px;
+    border-radius: 0.5rem;
+  }
+  
+  .programs-dropdown .dropdown-item {
+    color: #adb5bd; /* Bootstrap's gray text */
+  }
+  
+  .programs-dropdown .dropdown-item:hover {
+    background-color: #343a40; /* Slightly lighter dark on hover */
+    color: #fff;
+  }
+  

@@ -2,14 +2,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./App.css";
 import Home from "./Pages/Home/Home";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import {
   createBrowserRouter,
   createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import Coach from "./Pages/Home/CoachScreen/Coach";
-import Login from './Components/Auth/Login';
-import SignUp from './Components/Auth/signup';
+import Login from "./Components/Auth/Login";
+import SignUp from "./Components/Auth/signup";
 import Layout from "./Components/Layout";
 
 import BMICalculator from './Components/FitnessTools/BMI-calculator';
