@@ -25,3 +25,11 @@
 .card {
   background-color: var(--main-background-color);
 }
+@media (max-width: 768px) {
+  .all-achievements {
+    flex-direction: column;
+  }
+  .achievement-card {
+    width: 100%;
+  }
+}

@@ -7,6 +7,7 @@ import ProfileAbout from "../../../Components/ProfileAbout/ProfileAbout";
 import CoachAchievements from "../../../Components/CoachAchievements/CoachAchievements";
 import { useParams } from "react-router-dom";
 import { teamMembers } from "../../../Lib/teamMembers";
+import Slider from "../../../Components/Slider/Slider";
 
 const Coach = () => {
   const { id } = useParams();
@@ -26,18 +27,7 @@ const Coach = () => {
             />
           </div>
           <div className={`${styles["contact-container"]}`}>
-            {/* <a href={link} className={`btn service-btn text-white position-absolute bottom-0 fs-6 p-3 mx-auto`}>Message</a> */}
-            <Button
-              sx={{
-                color: "var(--white-color)",
-                backgroundColor: "var(--red-main-color)",
-                padding: 1,
-                textTransform: "none",
-              }}
-              size="small"
-            >
-              Message
-            </Button>
+            <Button sx={{color: "var(--white-color)",backgroundColor: "var(--red-main-color)", padding:1, textTransform: "none" }} size="small">Message</Button>
           </div>
         </div>
       </header>
@@ -54,12 +44,12 @@ const Coach = () => {
               phone={teamMembers[id-1].phone}
             />
           </div>
-          <div className={`${styles["container"]}`}>
+          <div className={`${styles["container"]} achievements`}>
             <CoachAchievements achievements={teamMembers[id-1].achievements} />
           </div>
         </div>
-        <div className={`${styles["other-coaches"]} container`}>
-          <h2>Other Coaches from coaches component</h2>
+        <div className={`${styles["other-coaches"]}`}>
+          <Slider />
         </div>
       </main>
     </div>

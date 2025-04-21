@@ -114,7 +114,7 @@ const GymPlanProgram = () => {
                         <small className="fw-bold">MOST POPULAR</small>
                       </div>
                     )}
-                    <Card.Body className="text-center">
+                    <Card.Body className="text-center bg-dark text-light">
                       <Card.Title className={`text-${plan.color} h3 mb-3`}>{plan.title}</Card.Title>
                       <div className="mb-3">
                         <span className="display-4">{plan.price}</span>
@@ -142,11 +142,11 @@ const GymPlanProgram = () => {
         </Row>
         
         {/* Sample Workout Schedule */}
-        <Row className="mb-5 bg-light p-4 rounded shadow-sm">
+        <Row className="mb-5 bg-dark text-light p-4 rounded shadow-sm">
           <Col>
             <h2 className="text-center mb-4">Sample Weekly Gym Schedule</h2>
-            <Table responsive bordered hover className="shadow-sm bg-white">
-              <thead className="bg-danger text-white">
+            <Table responsive bordered hover className="shadow-sm table-dark">
+              <thead>
                 <tr>
                   <th>Day</th>
                   <th>Focus</th>

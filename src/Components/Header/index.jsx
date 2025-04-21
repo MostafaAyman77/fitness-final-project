@@ -42,13 +42,13 @@ const FitMakerHeader = () => {
           <Nav className="mx-auto">
             <Nav.Link
               as={Link}
-              to={"/home"}
-              className={`mx-5 ${location.pathname === "/home" ? "border-bottom border-danger" : "text-white-50"}`}
+              to={"/"}
+              className={`mx-5 ${location.pathname === "/" ? "border-bottom border-danger" : "text-white-50"}`}
             >
               Home
             </Nav.Link>
 
-            <NavDropdown title="Programs" id="programs-dropdown"
+            <NavDropdown title="Programs" id="programs-dropdown" menuVariant="dark"
               className={`mx-5 ${[
                 "/weight-loss",
                 "/building-muscles",
@@ -67,7 +67,7 @@ const FitMakerHeader = () => {
             </NavDropdown>
 
 
-            <NavDropdown title="Coaching" id="programs-dropdown"
+            <NavDropdown title="Coaching" id="programs-dropdown" menuVariant="dark"
               className={`mx-5 ${[
                 "/one-on-one-coaching",
                 "/group-coaching",
