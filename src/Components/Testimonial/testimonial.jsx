@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Testimonial.css';
-
+import Heading from '../Heading/Heading'; 
 import { FaQuoteRight } from 'react-icons/fa';
 import { testimonialsData } from './testimonialData';
 
@@ -18,18 +18,20 @@ const Testimonial = () => {
 
   return (
     <div className="testimonial-wrapper">
-      <h1>What Our <span className="highlight">Customers Say</span></h1>
-      <p className="subheading">
-        At This Part You Can See Few Of The Many Positive Reviews Of Our Customers.
-      </p>
+      {}
+      <Heading
+        headOne="What Our"
+        headTwo="Customers Say"
+        headingParagraph="At This Part You Can See Few Of The Many Positive Reviews Of Our Customers."
+      />
 
       <div className="testimonial-body">
-        {/* Left Image */}
+        {}
         <div className="profile-img">
-          <img src={current.image} alt={current.name} /> {}
+          <img src={current.image} alt={current.name} />
         </div>
 
-        {/* Center Review */}
+        {}
         <div className="testimonial-card">
           <div className="reviewer">
             <span className="name">{current.name}</span>
@@ -39,7 +41,7 @@ const Testimonial = () => {
           <FaQuoteRight className="quote-icon" />
         </div>
 
-        {/* Right Thumbnails */}
+        {}
         <div className="testimonial-thumbnails">
           {testimonialsData.map((item, i) => (
             <div
@@ -47,14 +49,14 @@ const Testimonial = () => {
               className={`thumb ${i === index ? 'active' : ''}`}
               onClick={() => setIndex(i)}
             >
-              <img src={item.image} alt={item.name} /> {}
+              <img src={item.image} alt={item.name} />
               <p>{item.name}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Navigation Arrows */}
+      {}
       <div className="nav-arrows">
         <button onClick={handlePrev}>&larr;</button>
         <button onClick={handleNext}>&rarr;</button>
