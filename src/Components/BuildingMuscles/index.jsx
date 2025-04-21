@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Card, Button, ProgressBar } from 'react-bootstrap';
 import { ArrowRight, Stopwatch, Award, BarChart } from 'react-bootstrap-icons';
 import { CheckCircleFill } from 'react-bootstrap-icons';
-
+import BuildingMuscles from '../../Assets/images/building-muscles.png';
 
 const BuildingMusclesProgram = () => {
   return (
@@ -14,28 +14,37 @@ const BuildingMusclesProgram = () => {
             <p className="text-center lead text-light">Unlock your strength potential with our comprehensive muscle building system</p>
           </Col>
         </Row>
-        
-        <div>
-                      <h3 className="text-red">Why Choose Our Program?</h3>
-                      <ul className="list-unstyled">
-                        {[
-                          'Science-based training protocols',
-                          'Progressive overload techniques',
-                          'Personalized nutrition plans',
-                          'Recovery optimization',
-                          'Supplement guidance'
-                        ].map((benefit, index) => (
-                          <li key={index} className="mb-2 text-light">
-                            <CheckCircleFill className="text-danger me-2" />
-                            {benefit}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-        
+        <Row>
+          <Col lg={6} className="mb-4 mb-lg-0">
+          <div>
+            <h3 className="text-red">Why Choose Our Program?</h3>
+            <ul className="list-unstyled">
+              {[
+                'Science-based training protocols',
+                'Progressive overload techniques',
+                'Personalized nutrition plans',
+                'Recovery optimization',
+                'Supplement guidance'
+              ].map((benefit, index) => (
+                <li key={index} className="mb-2 text-light">
+                  <CheckCircleFill className="text-danger me-2" />
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+          </div>
+          </Col>
+          <Col lg={6}>
+              <img 
+                src={BuildingMuscles}
+                alt="Weight Loss Program" 
+                className="img-fluid shadow-sm rounded mb-4 w-100" 
+              />
+          </Col>
+        </Row>
         <Row className="mb-5">
           <Col>
-            <h2 className="text-center mb-4 text-danger">The Muscle Building Process</h2>
+            <h2 className="text-center mb-4 text-light">The Muscle Building Process</h2>
           </Col>
         </Row>
         

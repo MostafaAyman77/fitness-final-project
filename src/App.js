@@ -2,9 +2,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./App.css";
 import Home from "./Pages/Home/Home";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import {
   createBrowserRouter,
-  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import Coach from "./Pages/Home/CoachScreen/Coach";
@@ -24,7 +25,13 @@ import AccordionSection from "./Components/Accordion/AccordionSection";
 import OurServices from "./Components/ServicesSection/OurServices";
 import OneOnOneCoaching from "./Components/OneOnOneCoaching";
 import GroupCoaching from "./Components/GroupCoaching";
-
+import MemberShip from "./Components/Membership";
+import OnlineCoaching from "./Components/OnlineCoaching";
+import NutritionCoaching from "./Components/NutritionCoaching";
+import BMICalculator from './Components/FitnessTools/BMI-calculator';
+import CalorieCalculator from './Components/FitnessTools/Calorie-calculator';
+import MacronutrientCalculator from './Components/FitnessTools/Macronutrient-calculator';
+import GoalSettingTool from './Components/FitnessTools/Goal-Setting-Tool';
 
 const routes = createBrowserRouter([
   {
@@ -94,7 +101,35 @@ const routes = createBrowserRouter([
       {
         path: "group-coaching",
         element: <GroupCoaching />,
-      }
+      },
+      {
+        path: "membership",
+        element: <MemberShip />,
+      },
+      {
+        path: "online-coaching",
+        element: <OnlineCoaching />,
+      },
+      {
+        path: "nutrition-coaching",
+        element: <NutritionCoaching />,
+      },
+      {
+        path: "bmi-calculator",
+        element: <BMICalculator />,
+      },
+      {
+        path: "calorie-calculator",
+        element: <CalorieCalculator />,
+      },
+      {
+        path: "macro-calculator-1",
+        element: <MacronutrientCalculator />,
+      },
+      {
+        path: "goal-setting",
+        element: <GoalSettingTool />,
+      },
     ],
   },
   {

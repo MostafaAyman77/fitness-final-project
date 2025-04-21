@@ -5,6 +5,7 @@ import {
 } from "react-icons/fa";
 import { SiX } from "react-icons/si";
 import { Link } from 'react-router-dom';
+import "./styles.css";
 
 
 const Footer = () => {
@@ -26,11 +27,20 @@ const Footer = () => {
               <span className="text-warning"> Join Our Community </span> and Start Your Journey Towards a Healthier, Stronger You.
             </p>
             <div className="d-flex gap-3 mt-3 fs-5">
-              <FaFacebook />
-              <FaInstagram />
-              <SiX />
-              <FaYoutube />
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-light icon-hover">
+                <FaFacebook />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-light icon-hover">
+                <FaInstagram />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-light icon-hover">
+                <SiX />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-light icon-hover">
+                <FaYoutube />
+              </a>
             </div>
+
           </div>
 
           {/* Company */}
@@ -55,7 +65,7 @@ const Footer = () => {
               <li> <Link  className="text-light" to={''}>Nutrition Guides</Link></li>
               <li> <Link  className="text-light" to={'/faq'}>FAQ</Link></li>
               <li> <Link  className="text-light" to={''}>Success Stories</Link></li>
-              <li> <Link  className="text-light" to={''}>Membership</Link></li>
+              <li> <Link  className="text-light" to={'/membership'}>Membership</Link></li>
             </ul>
           </div>
 
@@ -75,8 +85,8 @@ const Footer = () => {
           {/* Contact */}
           <div className="col-md-2 mb-4">
             <h6 className="text-warning mb-3">Contact Us</h6>
-            <ul className="list-unstyled text-muted small">
-              <li className="text-light"><FaMapMarkerAlt className="me-2" /> USA - Washington DC</li>
+            <ul className="list-unstyled text-light small">
+              <li className="text-light"><FaMapMarkerAlt className="me-2" /> Egypt - Cairo</li>
               <li className="text-light"><FaPhone className="me-2" /> 1234-56789</li>
               <li className="text-light"><FaEnvelope className="me-2" /> Fitmakerrr@Gmail.Com</li>
             </ul>

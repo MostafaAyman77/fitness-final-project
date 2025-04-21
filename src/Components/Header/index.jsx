@@ -1,11 +1,14 @@
 import React from "react";
 import { Navbar, Nav, Container, Button, NavDropdown } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Search } from "react-bootstrap-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Header/styles.css";
 
+
 const FitMakerHeader = () => {
+  const location = useLocation();
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="py-2">
       <Container>
@@ -39,38 +42,40 @@ const FitMakerHeader = () => {
           <Nav className="mx-auto">
             <Nav.Link
               as={Link}
-              to={""}
-              className="text-white border-bottom border-danger mx-5"
+              to={"/"}
+              className={`mx-5 ${location.pathname === "/" ? "border-bottom border-danger" : "text-white-50"}`}
             >
               Home
             </Nav.Link>
 
-            <NavDropdown
-              title="Programs"
-              id="programs-dropdown"
-              className="mx-5 programs-dropdown"
+            <NavDropdown title="Programs" id="programs-dropdown" menuVariant="dark"
+              className={`mx-5 ${[
+                "/weight-loss",
+                "/building-muscles",
+                "/home-workout",
+                "/gym-plan",
+                "/our-plans",
+                "/fitness-group"
+              ].includes(location.pathname) ? "border-bottom border-danger" : "text-white-50"}`}
             >
-              <NavDropdown.Item as={Link} to={"/weight-loss"}>
-                Weight Loss
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to={"/building-muscles"}>
-                Building Muscles
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to={"/home-workout"}>
-                Home Workout
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to={"/gym-plan"}>
-                Gym Plan
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to={"/our-plans"}>
-                Our Plans
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to={"/fitness-group"}>
-                Fitness Group
-              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={"/weight-loss"}> Weight Loss </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={"/building-muscles"}> Building Muscles </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={"/home-workout"}> Home Workout </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={"/gym-plan"}> Gym Plan </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={"/our-plans"}>Our Plans </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={"/fitness-group"}>Fitness Group </NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown title="Coaching" id="programs-dropdown" className="mx-5 programs-dropdown">
+
+            <NavDropdown title="Coaching" id="programs-dropdown" menuVariant="dark"
+              className={`mx-5 ${[
+                "/one-on-one-coaching",
+                "/group-coaching",
+                "/online-coaching",
+                "/nutrition-coaching",
+                "/trainers"
+                ].includes(location.pathname) ? "border-bottom border-danger" : "text-white-50"}`}>
+
               <NavDropdown.Item as={Link} to={"/one-on-one-coaching"}>1-on-1 Coaching</NavDropdown.Item>
               <NavDropdown.Item as={Link} to={'/group-coaching'}>Group Coaching</NavDropdown.Item>
               <NavDropdown.Item as={Link} to={'/online-coaching'}>Online Coaching</NavDropdown.Item>
@@ -79,10 +84,10 @@ const FitMakerHeader = () => {
               <NavDropdown.Item as={Link} to="/trainers">Meet Our Coaches</NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="#membership" className="text-white-50 mx-5">
+            <Nav.Link as={Link} to="/membership" className={`mx-5 ${location.pathname === "/membership" ? "border-bottom border-danger" : "text-white-50"}`}>
               Membership
             </Nav.Link>
-            <Nav.Link as={Link} to="/about-us" className="text-white-50 mx-5">
+            <Nav.Link as={Link} to="/about-us" className={`mx-5 ${location.pathname === "/about-us" ? "border-bottom border-danger" : "text-white-50"}`}>
               About Us
             </Nav.Link>
           </Nav>
