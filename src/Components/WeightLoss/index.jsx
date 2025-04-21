@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { CheckCircleFill } from 'react-bootstrap-icons';
+import WeightLoss from '../../Assets/images/weight-loss.png';
 
 const WeightLossProgram = () => {
   return (
@@ -45,6 +46,13 @@ const WeightLossProgram = () => {
                 ))}
               </ul>
             </div>
+          </Col>
+          <Col lg={6}>
+              <img 
+                src={WeightLoss}
+                alt="Weight Loss Program" 
+                className="img-fluid shadow-sm rounded mb-4 w-100" 
+              />
           </Col>
         </Row>
 
