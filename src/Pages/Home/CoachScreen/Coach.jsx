@@ -54,7 +54,7 @@ const Coach = () => {
               phone={teamMembers[id-1].phone}
             />
           </div>
-          <div className={`${styles["container"]}`}>
+          <div className={`${styles["container"]} achievements`}>
             <CoachAchievements achievements={teamMembers[id-1].achievements} />
           </div>
         </div>
