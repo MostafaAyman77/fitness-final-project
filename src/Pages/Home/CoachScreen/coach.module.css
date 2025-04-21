@@ -20,11 +20,10 @@
   position: absolute;
   top: 80%;
   right: 10%;
-  width: 150px;
   color: var(--white-color);
   background-color: var(--red-main-color);
   font-weight: var(--weight-medium);
-  text-transform: none;
+  text-decoration: none;
   border-radius: 10px;
 }
 .aside-about {
@@ -55,5 +54,9 @@
     align-items: center;
     justify-content: center;
     margin: 10px 0;
+  }
+  .contact-container {
+    left: 10%;
+    width: fit-content;
   }
 }

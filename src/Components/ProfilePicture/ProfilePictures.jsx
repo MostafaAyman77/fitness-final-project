@@ -49,7 +49,7 @@ const ProfilePictures = ({profilePhoto , coachName , coachBio}) => {
                         className={`${styles["profile-photo"]}`}
                         sx={{ width: 179.82, height: 179.82, cursor: 'pointer'}}
                         alt="Profile photo"
-                        src={selectedImage || profilePhoto} 
+                        src={profilePhoto} 
                         onClick={handleAvatarClick}
                     />
                 </Stack>
