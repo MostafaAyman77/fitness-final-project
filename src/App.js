@@ -29,6 +29,10 @@ import GroupCoaching from "./Components/GroupCoaching";
 import MemberShip from "./Components/Membership";
 import OnlineCoaching from "./Components/OnlineCoaching";
 import NutritionCoaching from "./Components/NutritionCoaching";
+import BMICalculator from './Components/FitnessTools/BMI-calculator';
+import CalorieCalculator from './Components/FitnessTools/Calorie-calculator';
+import MacronutrientCalculator from './Components/FitnessTools/Macronutrient-calculator';
+import GoalSettingTool from './Components/FitnessTools/Goal-Setting-Tool';
 
 const routes = createBrowserRouter([
   {
@@ -36,7 +40,7 @@ const routes = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "",
+        path: "home",
         element: <Home />,
       },
       {
@@ -110,7 +114,23 @@ const routes = createBrowserRouter([
       {
         path: "nutrition-coaching",
         element: <NutritionCoaching />,
-      }
+      },
+      {
+        path: "bmi-calculator",
+        element: <BMICalculator />,
+      },
+      {
+        path: "calorie-calculator",
+        element: <CalorieCalculator />,
+      },
+      {
+        path: "macro-calculator-1",
+        element: <MacronutrientCalculator />,
+      },
+      {
+        path: "goal-setting",
+        element: <GoalSettingTool />,
+      },
     ],
   },
   {
