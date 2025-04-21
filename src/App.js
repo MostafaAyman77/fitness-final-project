@@ -6,7 +6,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import {
   createBrowserRouter,
-  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import Coach from "./Pages/Home/CoachScreen/Coach";
@@ -40,7 +39,7 @@ const routes = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "home",
+        path: "",
         element: <Home />,
       },
       {

@@ -48,7 +48,7 @@ const FitMakerHeader = () => {
               Home
             </Nav.Link>
 
-            <NavDropdown title="Programs" id="programs-dropdown"
+            <NavDropdown title="Programs" id="programs-dropdown" menuVariant="dark"
               className={`mx-5 ${[
                 "/weight-loss",
                 "/building-muscles",
@@ -67,7 +67,7 @@ const FitMakerHeader = () => {
             </NavDropdown>
 
 
-            <NavDropdown title="Coaching" id="programs-dropdown"
+            <NavDropdown title="Coaching" id="programs-dropdown" menuVariant="dark"
               className={`mx-5 ${[
                 "/one-on-one-coaching",
                 "/group-coaching",
