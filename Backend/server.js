@@ -1,19 +1,27 @@
-import dotenv from 'dotenv';
 import express from 'express';
-import { connectDB } from './Config/db.js';
+import dotenv from 'dotenv';
+import { connectDB } from './Config/db.js'; // Assuming you have your database connection in this file
+import userRoutes from './Routes/user.routes.js';
+import reviewRoutes from './Routes/reviews.routes.js';
 
-dotenv.config();
+dotenv.config(); // Load environment variables from .env file
 
 const app = express();
-app.use(express.json());
+app.use(express.json()); // Middleware to parse JSON request bodies
 
-// Connect to the database
 connectDB();
 
+// Define a basic route for testing
 app.get('/', (req, res) => {
-  res.send('API is running');
+  res.send('Fitness Tracker Backend API is running!');
 });
 
-// Set the port, defaulting to 5000 if the PORT environment variable is not set
+
+app.use('/users', userRoutes);
+app.use('/review', reviewRoutes)
+
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
