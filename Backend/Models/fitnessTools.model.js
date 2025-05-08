@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const fitnessToolsSchema = new mongoose.Schema({
+const fitnessToolsSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -14,4 +14,5 @@ const fitnessToolsSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('FitnessTools', fitnessToolsSchema);
+const FitnessTools = model('FitnessTools', fitnessToolsSchema);
+export default FitnessTools;    
