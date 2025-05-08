@@ -23,15 +23,6 @@ module.exports.searchUser = (req, res, next) => {
 }
 
 module.exports.addUser = async (req, res, next) => {
-    // UsersArray.push(req.body);
-    // res.send(UsersArray);
-    // try {
-    //     const user = new User(req.body);
-    //     user.save();
-    //     res.send(user);
-    // } catch (err) {
-    //     next(err);
-    // }
     try {
         const user = await User.create(req.body);
         res.send(user);
