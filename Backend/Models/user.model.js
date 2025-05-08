@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const { boolean } = require('webidl-conversions');
+import { Schema, model } from 'mongoose';
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -30,11 +29,11 @@ const userSchema = new mongoose.Schema({
         minLength: 8,
     },
     isCoach: {
-        type: boolean,
+        type: Boolean,
         default: false,
     },
 })
 
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const User = model('User', userSchema);
+export default User;

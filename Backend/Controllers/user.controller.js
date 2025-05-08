@@ -1,50 +1,44 @@
+import User from '../Models/user.model.js'; // Ensure the .js extension is present
 
-
-const User = require('../Models/user.model');
-
-
-module.exports.getAllUsers = async (req, res, next) => {
+export async function getAllUsers(req, res, next) {
     try {
-        const users = await User.find();
+        const users = await User.find(); // Use User.find()
         res.send(users);
     } catch (err) {
         next(err);
     }
 }
 
-module.exports.searchUser = (req, res, next) => {
-    // res.send(`I GOT The Search ${req.query.name}  `);
+export function searchUser(req, res, next) {
     try {
-        const users = User.find({ name: req.query.name });
-        res.send(users);
+        const users = User.find({ name: req.query.name }); // Use User.find()
+        res.send(users); // Remember to await or use .exec() if needed
     } catch (err) {
         next(err);
     }
 }
 
-module.exports.addUser = async (req, res, next) => {
+export async function addUser(req, res, next) {
     try {
-        const user = await User.create(req.body);
-        res.send(user);
-    } catch (err) {
-        next(err);
-
-    }
-
-}
-
-module.exports.updateUser = async (req, res, next) => {
-    try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const user = await User.create(req.body); // Use User.create()
         res.send(user);
     } catch (err) {
         next(err);
     }
 }
 
-module.exports.deleteUser = (req, res) => {
+export async function updateUser(req, res, next) {
     try {
-        const user = User.findByIdAndDelete(req.params.id);
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true }); // Use User.findByIdAndUpdate()
+        res.send(user);
+    } catch (err) {
+        next(err);
+    }
+}
+
+export async function deleteUser(req, res) { // Make this async to use await
+    try {
+        const user = await User.findByIdAndDelete(req.params.id); // Use User.findByIdAndDelete()
         res.send(user);
     } catch (err) {
         next(err);
