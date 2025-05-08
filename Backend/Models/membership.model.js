@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const membershipSchema = new mongoose.Schema({
+const membershipSchema = new Schema({
     benefits: {
         type: String,
         required: true,
@@ -14,4 +14,5 @@ const membershipSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('Membership', membershipSchema);
+const MemberShip = model('MemberShip', membershipSchema);
+export default MemberShip;    

@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import { connectDB } from './Config/db.js'; // Assuming you have your database connection in this file
 import userRoutes from './Routes/user.routes.js';
 import reviewRoutes from './Routes/reviews.routes.js';
+import membershipRoutes from './Routes/membership.routes.js';
+import fitnessToolsRoutes from './Routes/fitnessTools.routes.js';
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -18,7 +20,9 @@ app.get('/', (req, res) => {
 
 
 app.use('/users', userRoutes);
-app.use('/review', reviewRoutes)
+app.use('/review', reviewRoutes);
+app.use('/membership', membershipRoutes);
+app.use('/fitnessTools', fitnessToolsRoutes);
 
 const PORT = process.env.PORT || 5000;
 
