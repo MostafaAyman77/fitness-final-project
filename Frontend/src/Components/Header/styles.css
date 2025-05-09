@@ -12,7 +12,7 @@
   background-color: #343a40; /* Slightly lighter dark for hover */
   color: #fff;
 /* Default styles for large screens (already handled by Bootstrap classes) */
-
+}
 /* Media Query for tablets and below (e.g., max-width: 991px) */
 @media (max-width: 991px) {
   .navbar-nav {

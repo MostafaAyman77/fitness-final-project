@@ -1,8 +1,36 @@
 import React from "react";
-import { Container, Row, Col, Card, Button, Accordion, Badge} from "react-bootstrap";
+import { Container, Row, Col, Card, Button} from "react-bootstrap";
 import "./styles.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Membership = () => {
+
+  const [plans, setPlans] = useState([]);
+  const [benefits, setBenefits] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
+
+
+
+   useEffect(() => {
+    axios
+      .get("http://localhost:5000/membership/membership-plans")
+      .then((response) => setPlans(response.data))
+      .catch(console.error);
+
+    axios
+      .get("http://localhost:5000/membershipBenefits")
+      .then((response) => setBenefits(response.data))
+      .catch(console.error);
+
+    axios
+      .get("/api/testimonials")
+      .then((response) => setTestimonials(response.data))
+      .catch(console.error);
+  }, []);
+
+
+
   return (
     <>
       {/* Hero Section */}
@@ -21,58 +49,10 @@ const Membership = () => {
       <Container className="py-5">
         <h2 className="text-center text-light fw-bold mb-5">Choose Your Membership</h2>
         <Row>
-          {[
-            {
-              title: "Basic",
-              price: "$29",
-              period: "per month",
-              features: [
-                "Access to gym facilities",
-                "Basic equipment usage",
-                "2 group classes per week",
-                "Fitness assessment"
-              ],
-              color: "white",
-              textColor: "dark"
-            },
-            {
-              title: "Premium",
-              price: "$59",
-              period: "per month",
-              features: [
-                "Everything in Basic",
-                "Unlimited group classes",
-                "Access to premium equipment",
-                "Monthly fitness assessment",
-                "Nutrition guidance"
-              ],
-              popular: true,
-              color: "danger",
-              textColor: "white"
-            },
-            {
-              title: "Elite",
-              price: "$99",
-              period: "per month",
-              features: [
-                "Everything in Premium",
-                "2 personal training sessions/month",
-                "Custom workout plan",
-                "Priority booking",
-                "Recovery zone access",
-                "Nutrition coaching"
-              ],
-              color: "black",
-              textColor: "white"
-            }
-          ].map((plan, index) => (
+          {
+          plans.map((plan, index) => (
             <Col lg={4} key={index} className="mb-4">
               <Card className={`membership-card h-100 shadow border-0 bg-${plan.color} text-${plan.textColor}`}>
-                {plan.popular && (
-                  <div className="ribbon">
-                    <span className="ribbon-text">POPULAR</span>
-                  </div>
-                )}
                 <Card.Header className={`text-center border-0 pt-4 bg-${plan.color}`}>
                   <h3 className="fw-bold">{plan.title}</h3>
                 </Card.Header>
@@ -113,32 +93,7 @@ const Membership = () => {
         <Container>
           <h2 className="text-center fw-bold mb-5">Membership Benefits</h2>
           <Row className="g-4">
-            {[
-              {
-                title: "State-of-the-Art Facilities",
-                description: "Access to our premium gym facilities with the latest equipment and technology."
-              },
-              {
-                title: "Expert Trainers",
-                description: "Work with certified fitness professionals who will guide you to reach your goals."
-              },
-              {
-                title: "Group Classes",
-                description: "Join a variety of group fitness classes from HIIT to yoga and everything in between."
-              },
-              {
-                title: "Exclusive Content",
-                description: "Get access to members-only workout videos, nutrition guides, and recipes."
-              },
-              {
-                title: "Community Support",
-                description: "Be part of a motivating community that keeps you accountable and inspired."
-              },
-              {
-                title: "Mobile App",
-                description: "Track your progress, book classes, and access workouts on the go with our mobile app."
-              }
-            ].map((benefit, index) => (
+            {benefits.map((benefit, index) => (
               <Col className="bg-dark" md={6} lg={4} key={index}>
                 <div className="benefit-card p-4">
                   <div className="benefit-icon bg-danger mb-3"></div>
@@ -199,3 +154,4 @@ const Membership = () => {
 };
 
 export default Membership;
+            

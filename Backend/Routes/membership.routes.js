@@ -3,7 +3,7 @@ const router = Router();
 import { getAllMemberships, getMembershipById, addMembership, updateMembership, deleteMembership } from '../Controllers/membership.controller.js';
 
 // Route to get all memberships
-router.get('/', getAllMemberships);
+router.get('/membership-plans', getAllMemberships);
 
 // Route to get a membership by ID
 router.get('/:id', getMembershipById);

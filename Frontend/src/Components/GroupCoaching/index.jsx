@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Card, Button, Badge, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import GroupTraining from "../../Assets/images/group-training.png";
 const classes = [
     { name: 'Yoga', days: 'Mon, Wed', time: '10:00 AM', coach: 'Alice' },
