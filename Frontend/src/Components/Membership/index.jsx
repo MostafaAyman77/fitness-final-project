@@ -3,14 +3,14 @@ import { Container, Row, Col, Card, Button} from "react-bootstrap";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 const Membership = () => {
 
   const [plans, setPlans] = useState([]);
   const [benefits, setBenefits] = useState([]);
-  const [testimonials, setTestimonials] = useState([]);
-
-
+  const [reviews, setReviews] = useState([]);
 
    useEffect(() => {
     axios
@@ -24,8 +24,8 @@ const Membership = () => {
       .catch(console.error);
 
     axios
-      .get("/api/testimonials")
-      .then((response) => setTestimonials(response.data))
+      .get("http://localhost:5000/review")
+      .then((response) => setReviews(response.data))
       .catch(console.error);
   }, []);
 
@@ -106,38 +106,38 @@ const Membership = () => {
         </Container>
       </div>
 
-      {/* Member Testimonials */}
+      {/* Member reviews */}
 <Container className="py-5">
   <h2 className="text-center text-light fw-bold mb-5">What Our Members Say</h2>
   <Row>
-    {[1, 2, 3].map((testimonial, index) => (
+    {reviews.map((review, index) => (
       <Col md={4} key={index} className="mb-4">
         <Card className="h-100 bg-dark text-white shadow-sm border-0 p-4 text-center">
           <Card.Body className="p-0">
             {/* Avatar Icon */}
-            <i className="bi bi-person bg-danger rounded-circle text-white w-100  p-1 px-3 fs-2"></i>
+            <i className={`bi bi-person-circle  bg-danger rounded-circle text-white w-100 p-1 px-3 fs-2`}></i>
 
             {/* Stars */}
             <div className="py-2 mb-3">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <span key={star} className="text-danger">★</span>
+              {[...Array(review.rating)].map((_, starIndex) => (
+                <span key={starIndex} className="text-danger">★</span>
               ))}
             </div>
 
             {/* Testimonial */}
             <Card.Text className="fst-italic mb-3">
-              "Joining FitMaker was the best decision I've made for my health. The community is amazing and the facilities are top-notch!"
+              "{review.review}"
             </Card.Text>
 
             {/* Member Info */}
-            <p className="fw-bold mb-0">Member Name {index + 1}</p>
-            <small className="text-muted">Member since 2023</small>
+            <p className="fw-bold mb-0">{review.username}</p>
           </Card.Body>
         </Card>
       </Col>
     ))}
   </Row>
 </Container>
+
 
 
 
