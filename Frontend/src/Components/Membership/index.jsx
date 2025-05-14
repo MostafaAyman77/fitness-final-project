@@ -1,8 +1,36 @@
 import React from "react";
-import { Container, Row, Col, Card, Button, Accordion, Badge} from "react-bootstrap";
+import { Container, Row, Col, Card, Button} from "react-bootstrap";
 import "./styles.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 const Membership = () => {
+
+  const [plans, setPlans] = useState([]);
+  const [benefits, setBenefits] = useState([]);
+  const [reviews, setReviews] = useState([]);
+
+   useEffect(() => {
+    axios
+      .get("http://localhost:5000/membership/membership-plans")
+      .then((response) => setPlans(response.data))
+      .catch(console.error);
+
+    axios
+      .get("http://localhost:5000/membershipBenefits")
+      .then((response) => setBenefits(response.data))
+      .catch(console.error);
+
+    axios
+      .get("http://localhost:5000/review")
+      .then((response) => setReviews(response.data))
+      .catch(console.error);
+  }, []);
+
+
+
   return (
     <>
       {/* Hero Section */}
@@ -21,58 +49,10 @@ const Membership = () => {
       <Container className="py-5">
         <h2 className="text-center text-light fw-bold mb-5">Choose Your Membership</h2>
         <Row>
-          {[
-            {
-              title: "Basic",
-              price: "$29",
-              period: "per month",
-              features: [
-                "Access to gym facilities",
-                "Basic equipment usage",
-                "2 group classes per week",
-                "Fitness assessment"
-              ],
-              color: "white",
-              textColor: "dark"
-            },
-            {
-              title: "Premium",
-              price: "$59",
-              period: "per month",
-              features: [
-                "Everything in Basic",
-                "Unlimited group classes",
-                "Access to premium equipment",
-                "Monthly fitness assessment",
-                "Nutrition guidance"
-              ],
-              popular: true,
-              color: "danger",
-              textColor: "white"
-            },
-            {
-              title: "Elite",
-              price: "$99",
-              period: "per month",
-              features: [
-                "Everything in Premium",
-                "2 personal training sessions/month",
-                "Custom workout plan",
-                "Priority booking",
-                "Recovery zone access",
-                "Nutrition coaching"
-              ],
-              color: "black",
-              textColor: "white"
-            }
-          ].map((plan, index) => (
+          {
+          plans.map((plan, index) => (
             <Col lg={4} key={index} className="mb-4">
               <Card className={`membership-card h-100 shadow border-0 bg-${plan.color} text-${plan.textColor}`}>
-                {plan.popular && (
-                  <div className="ribbon">
-                    <span className="ribbon-text">POPULAR</span>
-                  </div>
-                )}
                 <Card.Header className={`text-center border-0 pt-4 bg-${plan.color}`}>
                   <h3 className="fw-bold">{plan.title}</h3>
                 </Card.Header>
@@ -113,32 +93,7 @@ const Membership = () => {
         <Container>
           <h2 className="text-center fw-bold mb-5">Membership Benefits</h2>
           <Row className="g-4">
-            {[
-              {
-                title: "State-of-the-Art Facilities",
-                description: "Access to our premium gym facilities with the latest equipment and technology."
-              },
-              {
-                title: "Expert Trainers",
-                description: "Work with certified fitness professionals who will guide you to reach your goals."
-              },
-              {
-                title: "Group Classes",
-                description: "Join a variety of group fitness classes from HIIT to yoga and everything in between."
-              },
-              {
-                title: "Exclusive Content",
-                description: "Get access to members-only workout videos, nutrition guides, and recipes."
-              },
-              {
-                title: "Community Support",
-                description: "Be part of a motivating community that keeps you accountable and inspired."
-              },
-              {
-                title: "Mobile App",
-                description: "Track your progress, book classes, and access workouts on the go with our mobile app."
-              }
-            ].map((benefit, index) => (
+            {benefits.map((benefit, index) => (
               <Col className="bg-dark" md={6} lg={4} key={index}>
                 <div className="benefit-card p-4">
                   <div className="benefit-icon bg-danger mb-3"></div>
@@ -151,38 +106,38 @@ const Membership = () => {
         </Container>
       </div>
 
-      {/* Member Testimonials */}
+      {/* Member reviews */}
 <Container className="py-5">
   <h2 className="text-center text-light fw-bold mb-5">What Our Members Say</h2>
   <Row>
-    {[1, 2, 3].map((testimonial, index) => (
+    {reviews.map((review, index) => (
       <Col md={4} key={index} className="mb-4">
         <Card className="h-100 bg-dark text-white shadow-sm border-0 p-4 text-center">
           <Card.Body className="p-0">
             {/* Avatar Icon */}
-            <i className="bi bi-person bg-danger rounded-circle text-white w-100  p-1 px-3 fs-2"></i>
+            <i className={`bi bi-person-circle  bg-danger rounded-circle text-white w-100 p-1 px-3 fs-2`}></i>
 
             {/* Stars */}
             <div className="py-2 mb-3">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <span key={star} className="text-danger">★</span>
+              {[...Array(review.rating)].map((_, starIndex) => (
+                <span key={starIndex} className="text-danger">★</span>
               ))}
             </div>
 
             {/* Testimonial */}
             <Card.Text className="fst-italic mb-3">
-              "Joining FitMaker was the best decision I've made for my health. The community is amazing and the facilities are top-notch!"
+              "{review.review}"
             </Card.Text>
 
             {/* Member Info */}
-            <p className="fw-bold mb-0">Member Name {index + 1}</p>
-            <small className="text-muted">Member since 2023</small>
+            <p className="fw-bold mb-0">{review.username}</p>
           </Card.Body>
         </Card>
       </Col>
     ))}
   </Row>
 </Container>
+
 
 
 
@@ -199,3 +154,4 @@ const Membership = () => {
 };
 
 export default Membership;
+            

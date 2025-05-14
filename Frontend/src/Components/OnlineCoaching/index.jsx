@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Card, Button, Form, Accordion } from "react-bootstrap";
+import { Container, Row, Col, Card, Button} from "react-bootstrap";
 import OnlineCoachingImage from "../../Assets/images/online-coaching.png";
 
 const OnlineCoaching = () => {

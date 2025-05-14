@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card, Button, Accordion } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button} from 'react-bootstrap';
 import { PersonCheck, Calendar, ChatDots, ListCheck } from 'react-bootstrap-icons';
 import OneOnOneCoachingImage from '../../Assets/images/1on1Coaching.png';
 
