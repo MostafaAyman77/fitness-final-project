@@ -21,8 +21,8 @@ import IndicatorDot from "./IndicatorDot";
 
 export default function DashboardHome() {
   return (
-    <section className="vh-100">
-      <div className="container-fluid h-100">
+    <section className="container p-0">
+      <div className="container-fluid h-100 p-0">
         <div className="row h-100">
           <div className="col-lg-9 d-flex flex-column gap-4 px-4 py-3 text-white bg-main">
             <div className="d-flex justify-content-between align-items-center">

@@ -1,6 +1,7 @@
 import React from 'react';
 import FitnessToolCard from './FitnessToolCard';
 import './FitnessToolsSection.css';
+import '../Heading/heading.module.css';
 import { fitnessToolsData } from './fitnessToolsData';
 
 const uniqueFitnessToolsData = fitnessToolsData.filter((tool, index, self) =>

@@ -1,11 +1,11 @@
 .testimonial-wrapper {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 30px 20px;
   font-family: 'Arial', sans-serif;
   color: #fff;
-  background-color: #1c1c1c;
+
   border-radius: 12px;
 }
 
@@ -35,7 +35,8 @@
 }
 
 .profile-img {
-  width: 180px; /* Ensure container has width */
+  width: 180px; 
+  height: 380px;
   display: flex;
   justify-content: center;
 }
@@ -44,7 +45,7 @@
   width: 180px;
   height: auto;
   border-radius: 10px;
-  background-color: #ccc; /* Fallback for missing images */
+  background-color: #ccc; 
 }
 
 .testimonial-card {
@@ -53,6 +54,7 @@
   padding: 20px;
   border-radius: 12px;
   position: relative;
+  margin-top: 150px;
 }
 
 .reviewer .name {
@@ -71,6 +73,7 @@
 .review {
   font-size: 15px;
   line-height: 1.6;
+  
 }
 
 .quote-icon {
@@ -79,13 +82,14 @@
   right: 15px;
   font-size: 30px;
   color: #ffcccc;
+
 }
 
 .testimonial-thumbnails {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 120px; /* Ensure thumbnails have space */
+  width: 120px;
 }
 
 .thumb {
@@ -95,7 +99,7 @@
   text-align: center;
   cursor: pointer;
   transition: border 0.3s;
-  width: 100px; /* Consistent sizing */
+  width: 100px;
 }
 
 .thumb.active {
@@ -108,7 +112,7 @@
   height: 80px;
   object-fit: cover;
   border-radius: 10px;
-  background-color: #ccc; /* Fallback for missing images */
+  background-color: #ccc; 
 }
 
 .thumb p {
@@ -138,10 +142,9 @@
 }
 
 .nav-arrows button:focus {
-  outline: none; /* Optional: remove default focus outline */
+  outline: none;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .profile-img {
     width: 120px;

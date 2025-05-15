@@ -3,7 +3,7 @@
   padding: 20px 15px;
   background-color: var(--main-background-color);
   border-radius: 10px;
-  width: 260px;
+  width: 300px;
   height: 310px;
 }
 
@@ -30,4 +30,9 @@
   margin-top: 10px;
   font-size: var(--fontSize-3);
   color: var(--white-color);
+}
+@media (max-width: 600px) {
+  .profile-about-container {
+    width: 325px;
+  }
 }
