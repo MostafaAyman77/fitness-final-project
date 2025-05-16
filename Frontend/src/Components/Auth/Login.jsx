@@ -1,42 +1,66 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./Styles.css";
 import fitMan from "../../Assets/images/fitman.png";
-const Login = ({ onSwitchMode }) => {
+
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    setError("");
+  const handleLogin = async (e) => {
+  e.preventDefault();
+  setError("");
 
-    if (!email || !password) {
-      setError("Email and password are required.");
+  if (!email || !password) {
+    setError("Email and password are required.");
+    return;
+  }
+
+  try {
+    const response = await axios.get(`http://localhost:5000/users/login/${email}`, {
+  params: { password },
+});
+ 
+
+  
+
+    const user = response.data;
+    if(response.data === null) {
+      setError("User not found.");
+    }
+    if (response.data.password !== password) {
+      setError("Incorrect email or password.");
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (u) => u.email === email && u.password === password
-    );
+    
 
-    if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/");
+    localStorage.setItem("user", JSON.stringify(user));
+
+    // Optional: store user info in app state or context
+    // Example: setCurrentUser(user); if using context
+
+    navigate("/");
+  } catch (err) {
+    console.error(err);
+    if (err.response && err.response.data && err.response.data.message) {
+      setError(err.response.data.message);
     } else {
-      setError("Invalid email or password.");
+      setError("Login failed. Please try again.");
     }
-  };
+  }
+};
+
 
   return (
     <Container className="main-login d-flex justify-content-center align-items-center w-100 min-vh-100">
       <div
         className="login p-4"
         style={{
-          width: "",
           maxWidth: "500px",
           backgroundColor: "rgba(96, 0, 0, 0.85)",
           color: "white",
@@ -80,7 +104,7 @@ const Login = ({ onSwitchMode }) => {
             </Alert>
           )}
 
-          <Button variant="danger" type="submit" className="w-100 mt-2">
+          <Button variant="danger" onClick={handleLogin} className="w-100 mt-2">
             Login
           </Button>
 
@@ -93,7 +117,8 @@ const Login = ({ onSwitchMode }) => {
                   color: "#fff",
                   textDecoration: "underline",
                 }}
-                  onClick={() => navigate("/register")}              >
+                onClick={() => navigate("/register")}
+              >
                 Register
               </span>
             </span>

@@ -18,6 +18,15 @@ export function searchUser(req, res, next) {
     }
 }
 
+export async function getUserByEmail(req, res, next) {
+    
+    try {
+        const user = await User.findOne({ email: req.params.email });
+        res.send(user);
+    } catch (err) {
+        next(err);
+    }
+}
 export async function addUser(req, res, next) {
     try {
         const user = await User.create(req.body); // Use User.create()
