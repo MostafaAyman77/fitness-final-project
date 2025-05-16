@@ -31,10 +31,14 @@ const FitMakerHeader = () => {
         </div>
 
         <div className="d-flex order-lg-last">
+          <Link to="/login">
           <Button variant="outline-danger" className="me-2">
             Login
           </Button>
+          </Link>
+          <Link to="/register">
           <Button variant="danger">Sign Up</Button>
+          </Link>
         </div>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
