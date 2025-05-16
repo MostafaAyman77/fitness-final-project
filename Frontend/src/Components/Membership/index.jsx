@@ -4,15 +4,15 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Membership = () => {
-
   const [plans, setPlans] = useState([]);
   const [benefits, setBenefits] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const navigate = useNavigate(); // Initialize navigate
 
-   useEffect(() => {
+  useEffect(() => {
     axios
       .get("http://localhost:5000/membership/membership-plans")
       .then((response) => setPlans(response.data))
@@ -29,7 +29,10 @@ const Membership = () => {
       .catch(console.error);
   }, []);
 
-
+  const handleSelectPlan = () => {
+    console.log("Select Plan button clicked");
+    navigate('/booking'); // Navigate to /booking
+  };
 
   return (
     <>
@@ -50,38 +53,40 @@ const Membership = () => {
         <h2 className="text-center text-light fw-bold mb-5">Choose Your Membership</h2>
         <Row>
           {
-          plans.map((plan, index) => (
-            <Col lg={4} key={index} className="mb-4">
-              <Card className={`membership-card h-100 shadow border-0 bg-${plan.color} text-${plan.textColor}`}>
-                <Card.Header className={`text-center border-0 pt-4 bg-${plan.color}`}>
-                  <h3 className="fw-bold">{plan.title}</h3>
-                </Card.Header>
-                <Card.Body className="text-center">
-                  <div className="price-container mb-4">
-                    <span className="currency">$</span>
-                    <span className="price-value">{plan.price.replace("$", "")}</span>
-                    <span className="price-period">{plan.period}</span>
-                  </div>
-                  <ul className="feature-list">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="mb-2">
-                        <i className="feature-check">✓</i> {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </Card.Body>
-                <Card.Footer className={`text-center border-0 pb-4 bg-${plan.color}`}>
-                  <Button 
-                    variant={plan.color === "danger" ? "light" : "danger"} 
-                    size="lg" 
-                    className="px-4"
-                  >
-                    Select Plan
-                  </Button>
-                </Card.Footer>
-              </Card>
-            </Col>
-          ))}
+            plans.map((plan, index) => (
+              <Col lg={4} key={index} className="mb-4">
+                <Card className={`membership-card h-100 shadow border-0 bg-${plan.color} text-${plan.textColor}`}>
+                  <Card.Header className={`text-center border-0 pt-4 bg-${plan.color}`}>
+                    <h3 className="fw-bold">{plan.title}</h3>
+                  </Card.Header>
+                  <Card.Body className="text-center">
+                    <div className="price-container mb-4">
+                      <span className="currency">$</span>
+                      <span className="price-value">{plan.price.replace("$", "")}</span>
+                      <span className="price-period">{plan.period}</span>
+                    </div>
+                    <ul className="feature-list">
+                      {plan.features.map((feature, i) => (
+                        <li key={i} className="mb-2">
+                          <i className="feature-check">✓</i> {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </Card.Body>
+                  <Card.Footer className={`text-center border-0 pb-4 bg-${plan.color}`}>
+                    <Button
+                      variant={plan.color === "danger" ? "light" : "danger"}
+                      size="lg"
+                      className="px-4"
+                      onClick={handleSelectPlan} // Add onClick handler
+                    >
+                      Select Plan
+                    </Button>
+                  </Card.Footer>
+                </Card>
+              </Col>
+            ))
+          }
         </Row>
         <div className="text-center text-light mt-4">
           <p>Need a custom membership? <a href="#contact" className="text-danger">Contact us</a> for corporate rates and special packages.</p>
@@ -107,39 +112,36 @@ const Membership = () => {
       </div>
 
       {/* Member reviews */}
-<Container className="py-5">
-  <h2 className="text-center text-light fw-bold mb-5">What Our Members Say</h2>
-  <Row>
-    {reviews.map((review, index) => (
-      <Col md={4} key={index} className="mb-4">
-        <Card className="h-100 bg-dark text-white shadow-sm border-0 p-4 text-center">
-          <Card.Body className="p-0">
-            {/* Avatar Icon */}
-            <i className={`bi bi-person-circle  bg-danger rounded-circle text-white w-100 p-1 px-3 fs-2`}></i>
+      <Container className="py-5">
+        <h2 className="text-center text-light fw-bold mb-5">What Our Members Say</h2>
+        <Row>
+          {reviews.map((review, index) => (
+            <Col md={4} key={index} className="mb-4">
+              <Card className="h-100 bg-dark text-white shadow-sm border-0 p-4 text-center">
+                <Card.Body className="p-0">
+                  {/* Avatar Icon */}
+                  <i className={`bi bi-person-circle  bg-danger rounded-circle text-white w-100 p-1 px-3 fs-2`}></i>
 
-            {/* Stars */}
-            <div className="py-2 mb-3">
-              {[...Array(review.rating)].map((_, starIndex) => (
-                <span key={starIndex} className="text-danger">★</span>
-              ))}
-            </div>
+                  {/* Stars */}
+                  <div className="py-2 mb-3">
+                    {[...Array(review.rating)].map((_, starIndex) => (
+                      <span key={starIndex} className="text-danger">★</span>
+                    ))}
+                  </div>
 
-            {/* Testimonial */}
-            <Card.Text className="fst-italic mb-3">
-              "{review.review}"
-            </Card.Text>
+                  {/* Testimonial */}
+                  <Card.Text className="fst-italic mb-3">
+                    "{review.review}"
+                  </Card.Text>
 
-            {/* Member Info */}
-            <p className="fw-bold mb-0">{review.username}</p>
-          </Card.Body>
-        </Card>
-      </Col>
-    ))}
-  </Row>
-</Container>
-
-
-
+                  {/* Member Info */}
+                  <p className="fw-bold mb-0">{review.username}</p>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
 
       {/* Call to Action */}
       <div className="cta-section bg-danger text-white py-5">
@@ -154,4 +156,3 @@ const Membership = () => {
 };
 
 export default Membership;
-            

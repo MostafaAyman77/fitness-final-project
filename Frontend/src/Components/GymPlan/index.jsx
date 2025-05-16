@@ -1,20 +1,21 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button, Table, Badge } from 'react-bootstrap';
 import { Diagram3Fill, Calendar3Week, Award, Speedometer } from 'react-bootstrap-icons';
 import GymTraining from '../../Assets/images/gym-training.png';
+import GymBookingForm from '../BookingScreen/GymBookingForm.jsx';
 
 const GymPlanProgram = () => {
   const navigate = useNavigate();
 
   const handleSelectPlan = (planTitle) => {
     console.log("Selected plan:", planTitle);
-    navigate('/booking');
+    navigate('/booking'); // Changed to '/booking'
   };
 
   const handleGenericNavigate = () => {
     console.log("Navigating to booking");
-    navigate('/booking');
+    navigate('/booking'); // Changed to '/booking'
   };
 
   return (
@@ -32,9 +33,9 @@ const GymPlanProgram = () => {
                 Strategic programming to maximize your gym results
               </p>
               <div className="position-relative z-index-1 text-center">
-                <Button 
-                  variant="danger" 
-                  size="lg" 
+                <Button
+                  variant="danger"
+                  size="lg"
                   className="px-4"
                   onClick={handleGenericNavigate}
                 >
@@ -157,13 +158,15 @@ const GymPlanProgram = () => {
                           </li>
                         ))}
                       </ul>
-                      <Button
-                        variant={plan.featured ? 'danger' : 'outline-dark'}
-                        className="w-100"
-                        onClick={() => handleSelectPlan(plan.title)}
-                      >
-                        Select Plan
-                      </Button>
+                      <Link to="/booking"> {/* Changed to <Link to="/booking"> */}
+                        <Button
+                          variant={plan.featured ? 'danger' : 'outline-dark'}
+                          className="w-100"
+                          onClick={() => handleSelectPlan(plan.title)}
+                        >
+                          Select Plan
+                        </Button>
+                      </Link>
                     </Card.Body>
                   </Card>
                 </Col>

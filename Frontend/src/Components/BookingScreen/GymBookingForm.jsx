@@ -233,7 +233,7 @@ export default function GymBookingForm() {
               <div className="text-xl font-bold">{selectedPackage.price}EGP</div>
               <button
                 onClick={handleNext}
-                 className="bg-red-500 text-white px-4 py-2 rounded-md text-sm cursor-pointer"
+                style={{ backgroundColor: 'red', color: 'white', padding: '8px 16px', borderRadius: '6px', fontSize: '0.875rem', cursor: 'pointer' }}
               >
                 Book Now
               </button>
@@ -248,7 +248,7 @@ export default function GymBookingForm() {
             <div className="text-sm">Please pay at any of our branches.</div>
             <button
               onClick={handleConfirmCash}
-              className="bg-red-500 text-white px-4 py-2 rounded-md text-sm"
+              style={{ backgroundColor: 'red', color: 'white', padding: '8px 16px', borderRadius: '6px', fontSize: '0.875rem', cursor: 'pointer' }}
             >
               Confirm
             </button>
@@ -286,7 +286,7 @@ export default function GymBookingForm() {
               value={cvv}
               onChange={(e) => setCvv(e.target.value)}
             />
-            <button className="bg-red-500 text-white px-4 py-2 rounded-md text-sm">
+            <button style={{ backgroundColor: 'red', color: 'white', padding: '8px 16px', borderRadius: '6px', fontSize: '0.875rem', cursor: 'pointer' }}>
               Proceed To Pay
             </button>
           </div>
