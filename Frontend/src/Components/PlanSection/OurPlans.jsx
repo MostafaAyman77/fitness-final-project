@@ -2,8 +2,10 @@ import React from 'react';
 import Heading from "../Heading/Heading";
 import Button from '@mui/material/Button';
 import styles from "./ourPlans.module.css"
+import { useNavigate } from "react-router-dom";
 
 const OurPlans = () => {
+   const navigate = useNavigate();
     const monthlyPlans = [
         {
             id: 1,
@@ -39,6 +41,18 @@ const OurPlans = () => {
         }
     ];
 
+    
+
+    const handleSelectPlan = (planTitle) => {
+    console.log("Selected plan:", planTitle);
+    navigate('/booking');
+  };
+
+  const handleGenericNavigate = () => {
+    console.log("Navigating to booking");
+    navigate('/booking');
+  };
+
     return (
         <div id="programs" className={`${styles["plans-container"]} container py-5 text-white mx-auto`}>
             <Heading
@@ -72,7 +86,7 @@ const OurPlans = () => {
                                     <sub className={`currency`}>/{plan.currency}</sub>
                                 </div>
                                 <div className={`text-center`}>
-                                    <Button sx={{color: "var(--white-color)",backgroundColor: "var(--red-main-color)", padding:1, textTransform: "none", margin:1 }} size="small">Choose This Plan</Button>
+                                    <Button sx={{color: "var(--white-color)",backgroundColor: "var(--red-main-color)", padding:1, textTransform: "none", margin:1 }} size="small"  onClick={() => handleSelectPlan(plan.title)}>Choose This Plan</Button>
                                 </div>
                             </div>
                         </div>

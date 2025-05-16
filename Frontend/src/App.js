@@ -30,12 +30,9 @@ import BMICalculator from './Components/FitnessTools/BMI-calculator';
 import CalorieCalculator from './Components/FitnessTools/Calorie-calculator';
 import MacronutrientCalculator from './Components/FitnessTools/Macronutrient-calculator';
 import GoalSettingTool from './Components/FitnessTools/Goal-Setting-Tool';
-<<<<<<< HEAD:src/App.js
 import GymBookingForm from './Components/BookingScreen/GymBookingForm';
-=======
 import Register from "./Components/Auth/Register";
 import CoachWrapper from "./Components/CoachWrapper";
->>>>>>> 4eb5d750840bac2e510471b409bca9506986d3cb:Frontend/src/App.js
 
 const routes = createBrowserRouter([
   {
