@@ -44,7 +44,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "coach/:id",
-        element: <Coach />,
+        element: <CoachWrapper />,
       },
       {
         path: "login",
