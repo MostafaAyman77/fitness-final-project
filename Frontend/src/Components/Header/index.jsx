@@ -40,12 +40,7 @@ const FitMakerHeader = () => {
 
         <div className="d-flex order-lg-last">
           <Link to="/login">
-          <Button variant="outline-danger" className="me-2">
-            Login
-          </Button>
-          </Link>
-          <Link to="/register">
-          <Button variant="danger">Sign Up</Button>
+          <Button variant="danger">Logout</Button>
           </Link>
         </div>
 
