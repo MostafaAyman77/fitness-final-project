@@ -44,9 +44,8 @@ const Register = ({ onSwitchMode }) => {
     });
 
 
-    if (response.status === 201) {
-      alert("Registration successful! Please login.");
-      navigate("/login");
+    if (response.status === 200) {
+      setError("Registration successful. Please login.");
     }
   } catch (err) {
     if (err.response && err.response.data && err.response.data.message) {
