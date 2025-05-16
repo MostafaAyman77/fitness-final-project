@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import Coach from "./Pages/Home/CoachScreen/Coach";
 import Login from "./Components/Auth/Login";
-import SignUp from "./Components/Auth/signup";
 import Layout from "./Components/Layout";
 import DashboardHome from "./Components/Dashboard/DashboardHome/DashboardHome";
 import OurPlans from "./Components/PlanSection/OurPlans";
@@ -32,104 +31,36 @@ import BMICalculator from './Components/FitnessTools/BMI-calculator';
 import CalorieCalculator from './Components/FitnessTools/Calorie-calculator';
 import MacronutrientCalculator from './Components/FitnessTools/Macronutrient-calculator';
 import GoalSettingTool from './Components/FitnessTools/Goal-Setting-Tool';
+import Register from "./Components/Auth/Register";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      {
-        path: "",
-        element: <Home />,
-      },
-      {
-        path: "coach/:id",
-        element: <Coach />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "signup",
-        element: <SignUp />,
-      },
-      {
-        path: "our-plans",
-        element: <OurPlans />,
-      },
-      {
-        path: "trainers",
-        element: <SliderSection />,
-      },
-      {
-        path: "about-us",
-        element: <AboutUs />,
-      },
-      {
-        path: "weight-loss",
-        element: <WeightLossProgram />,
-      },
-      {
-        path: "building-muscles",
-        element: <BuildingMusclesProgram />,
-      },
-      {
-        path: "home-workout",
-        element: <HomeWorkoutProgram />,
-      },
-      {
-        path: "gym-plan",
-        element: <GymPlanProgram />,
-      },
-      {
-        path: "fitness-group",
-        element: <FitnessGroupProgram />,
-      },
-      {
-        path: "faq",
-        element: <AccordionSection />,
-      },
-      {
-        path: "our-services",
-        element: <OurServices />,
-      },
-      {
-        path: "one-on-one-coaching",
-        element: <OneOnOneCoaching />,
-      },
-      {
-        path: "group-coaching",
-        element: <GroupCoaching />,
-      },
-      {
-        path: "membership",
-        element: <MemberShip />,
-      },
-      {
-        path: "online-coaching",
-        element: <OnlineCoaching />,
-      },
-      {
-        path: "nutrition-coaching",
-        element: <NutritionCoaching />,
-      },
-      {
-        path: "bmi-calculator",
-        element: <BMICalculator />,
-      },
-      {
-        path: "calorie-calculator",
-        element: <CalorieCalculator />,
-      },
-      {
-        path: "macro-calculator-1",
-        element: <MacronutrientCalculator />,
-      },
-      {
-        path: "goal-setting",
-        element: <GoalSettingTool />,
-      },
+      {path: "",element: <Home />},
+      {  path: "coach/:id",  element: <Coach />},
+      {  path: "login",  element: <Login />},
+      {  path: "register",  element: <Register />},
+      {  path: "our-plans",  element: <OurPlans />},
+      {  path: "trainers",  element: <SliderSection />},
+      {  path: "about-us",  element: <AboutUs />},
+      {  path: "weight-loss",  element: <WeightLossProgram />},
+      {  path: "building-muscles",  element: <BuildingMusclesProgram />},
+      {  path: "home-workout",  element: <HomeWorkoutProgram />},
+      {  path: "gym-plan",  element: <GymPlanProgram />},
+      {  path: "fitness-group",  element: <FitnessGroupProgram />,},
+      {  path: "faq",  element: <AccordionSection />},
+      {  path: "our-services",  element: <OurServices />},
+      {  path: "one-on-one-coaching",  element: <OneOnOneCoaching />},
+      {  path: "group-coaching",  element: <GroupCoaching />},
+      {  path: "membership",  element: <MemberShip />},
+      {  path: "online-coaching",  element: <OnlineCoaching />},
+      {  path: "nutrition-coaching",  element: <NutritionCoaching />},
+      {  path: "bmi-calculator",  element: <BMICalculator />},
+      {  path: "calorie-calculator",  element: <CalorieCalculator />},
+      {  path: "macro-calculator-1",  element: <MacronutrientCalculator />},
+      {  path: "goal-setting",  element: <GoalSettingTool />},
     ],
   },
   {
