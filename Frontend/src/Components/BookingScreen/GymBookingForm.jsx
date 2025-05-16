@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
+import axios from 'axios';
 
 const packageOptions = [
   { name: 'Basic Package', days: '2days/week', price: 500 },
@@ -7,26 +8,15 @@ const packageOptions = [
   { name: 'VIP Package', days: '5days/week', price: 1200 },
 ];
 
-const instructorOptions = [
-  { name: 'John Doe', specialty: 'Ypga Instructor' },
-  { name: 'Jane Smith', specialty: 'Nutrition Expert' },
-  { name: 'Mike Johnson', specialty: 'Physical Therapist' },
-  { name: 'Sam Cole', specialty: 'Personal Trainer' },
-  { name: 'Laura Brown', specialty: 'Health Coach' },
-  { name: 'Emma White', specialty: 'Fitness Specialist' },
-  { name: 'Chris Green', specialty: 'Strength Coach' },
-  { name: 'Olivia Lee', specialty: 'Pilates Expert' },
-  { name: 'Stan Lee', specialty: 'Pilates Expert' },
-  { name: 'Robert Di Nero', specialty: 'Pilates Expert' },
-  { name: 'Chris Evans', specialty: 'Pilates Expert' },
-];
-
 export default function GymBookingForm() {
   const [currentFrame, setCurrentFrame] = useState(1);
   const [selectedPackage, setSelectedPackage] = useState(packageOptions[0]);
   const [isPackageDropdownOpen, setIsPackageDropdownOpen] = useState(false);
-  const [selectedInstructor, setSelectedInstructor] = useState(instructorOptions[0]);
+
+  const [instructorOptions, setInstructorOptions] = useState([]);
+  const [selectedInstructor, setSelectedInstructor] = useState(null);
   const [isInstructorDropdownOpen, setIsInstructorDropdownOpen] = useState(false);
+
   const [startDate, setStartDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('Cash');
@@ -37,10 +27,11 @@ export default function GymBookingForm() {
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
 
-  const packageDropdownRef = useRef(null);
-  const instructorDropdownRef = useRef(null);
   const [hoveredPackageOption, setHoveredPackageOption] = useState(null);
   const [hoveredInstructorOption, setHoveredInstructorOption] = useState(null);
+
+  const packageDropdownRef = useRef(null);
+  const instructorDropdownRef = useRef(null);
 
   useEffect(() => {
     const now = new Date();
@@ -48,6 +39,20 @@ export default function GymBookingForm() {
     const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: true };
     setStartDate(now.toLocaleDateString(undefined, optionsDate));
     setStartTime(now.toLocaleTimeString(undefined, optionsTime));
+
+    const fetchInstructors = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/trainers/');
+        setInstructorOptions(response.data);
+        if (response.data.length > 0) {
+          setSelectedInstructor(response.data[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching instructors:', error);
+      }
+    };
+
+    fetchInstructors();
   }, []);
 
   const handleNext = () => {
@@ -61,12 +66,12 @@ export default function GymBookingForm() {
   };
 
   const togglePackageDropdown = () => {
-    setIsPackageDropdownOpen(!isPackageDropdownOpen);
+    setIsPackageDropdownOpen((prev) => !prev);
     setIsInstructorDropdownOpen(false);
   };
 
-  const selectPackageOption = (option) => {
-    const selected = packageOptions.find((p) => p.name === option);
+  const selectPackageOption = (optionName) => {
+    const selected = packageOptions.find((p) => p.name === optionName);
     if (selected) {
       setSelectedPackage(selected);
       setIsPackageDropdownOpen(false);
@@ -75,12 +80,12 @@ export default function GymBookingForm() {
   };
 
   const toggleInstructorDropdown = () => {
-    setIsInstructorDropdownOpen(!isInstructorDropdownOpen);
+    setIsInstructorDropdownOpen((prev) => !prev);
     setIsPackageDropdownOpen(false);
   };
 
-  const selectInstructorOption = (option) => {
-    const selected = instructorOptions.find((i) => i.name === option);
+  const selectInstructorOption = (optionName) => {
+    const selected = instructorOptions.find((i) => i.name === optionName);
     if (selected) {
       setSelectedInstructor(selected);
       setIsInstructorDropdownOpen(false);
@@ -95,35 +100,13 @@ export default function GymBookingForm() {
   };
 
   const handleConfirmCash = () => {
-    alert(`Booking confirmed for ${selectedPackage.name} with ${selectedInstructor.name}. Total cost: ${selectedPackage.price}EGP. Please pay at any of our branches.`);
+    alert(`Booking confirmed for ${selectedPackage.name} with ${selectedInstructor?.name}. Total cost: ${selectedPackage.price}EGP. Please pay at any of our branches.`);
   };
 
-  const handleMouseEnterPackageArea = () => {
-    if (isInstructorDropdownOpen) {
-      setIsInstructorDropdownOpen(false);
-    }
-    setIsPackageDropdownOpen(true);
-  };
-
-  const handleMouseEnterInstructorArea = () => {
-    if (isPackageDropdownOpen) {
-      setIsPackageDropdownOpen(false);
-    }
-    setIsInstructorDropdownOpen(true);
-  };
-
-  const handleMouseLeavePackageArea = () => {
+  const handleMouseLeaveDropdown = (ref, setOpen) => {
     setTimeout(() => {
-      if (packageDropdownRef.current && !packageDropdownRef.current.matches(':hover')) {
-        setIsPackageDropdownOpen(false);
-      }
-    }, 100);
-  };
-
-  const handleMouseLeaveInstructorArea = () => {
-    setTimeout(() => {
-      if (instructorDropdownRef.current && !instructorDropdownRef.current.matches(':hover')) {
-        setIsInstructorDropdownOpen(false);
+      if (ref.current && !ref.current.matches(':hover')) {
+        setOpen(false);
       }
     }, 100);
   };
@@ -131,25 +114,23 @@ export default function GymBookingForm() {
   return (
     <div className="bg-black text-white p-4 flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md">
-        {}
         {currentFrame === 1 && !showCashInfo && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold" style={{ cursor: 'default' }}>Book Your Package</h2>
+            <h2 className="text-2xl font-bold">Book Your Package</h2>
 
+            {/* Package Dropdown */}
             <div>
-              <div className="text-sm mb-1" style={{ cursor: 'default' }}>Select Package</div>
+              <div className="text-sm mb-1">Select Package</div>
               <div
                 className="relative"
-                onMouseLeave={handleMouseLeavePackageArea}
-                onMouseEnter={handleMouseEnterPackageArea}
+                onMouseLeave={() => handleMouseLeaveDropdown(packageDropdownRef, setIsPackageDropdownOpen)}
               >
                 <div
                   className="bg-white text-black p-2 rounded-md flex justify-between items-center cursor-pointer"
                   onClick={togglePackageDropdown}
-                  style={{ cursor: 'pointer' }}
                 >
-                  <span style={{ cursor: 'default' }}>{selectedPackage.name}</span>
-                  <X className="h-4 w-4 text-gray-400" style={{ cursor: 'pointer' }} />
+                  <span>{selectedPackage.name}</span>
+                  <X className="h-4 w-4 text-gray-400" />
                 </div>
                 {isPackageDropdownOpen && (
                   <div
@@ -159,15 +140,12 @@ export default function GymBookingForm() {
                     {packageOptions.map((option) => (
                       <div
                         key={option.name}
-                        className={`p-2 cursor-pointer`}
+                        className="p-2 cursor-pointer"
                         onClick={() => selectPackageOption(option.name)}
                         onMouseEnter={() => setHoveredPackageOption(option.name)}
                         onMouseLeave={() => setHoveredPackageOption(null)}
                         style={{
-                          cursor: 'pointer',
-                          backgroundColor:
-                            hoveredPackageOption === option.name ? 'red' : 'transparent',
-                          color: 'black',
+                          backgroundColor: hoveredPackageOption === option.name ? 'red' : 'transparent',
                         }}
                       >
                         {option.name}
@@ -176,23 +154,22 @@ export default function GymBookingForm() {
                   </div>
                 )}
               </div>
-              <div className="text-red-500 text-xs mt-1" style={{ cursor: 'default' }}>{selectedPackage.days}</div>
+              <div className="text-red-500 text-xs mt-1">{selectedPackage.days}</div>
             </div>
 
+            {/* Instructor Dropdown */}
             <div>
-              <div className="text-sm mb-1" style={{ cursor: 'default' }}>Select Gym Instructor</div>
+              <div className="text-sm mb-1">Select Gym Instructor</div>
               <div
                 className="relative"
-                onMouseLeave={handleMouseLeaveInstructorArea}
-                onMouseEnter={handleMouseEnterInstructorArea}
+                onMouseLeave={() => handleMouseLeaveDropdown(instructorDropdownRef, setIsInstructorDropdownOpen)}
               >
                 <div
                   className="bg-white text-black p-2 rounded-md flex justify-between items-center cursor-pointer"
                   onClick={toggleInstructorDropdown}
-                  style={{ cursor: 'pointer' }}
                 >
-                  <span style={{ cursor: 'default' }}>{selectedInstructor.name}</span>
-                  <X className="h-4 w-4 text-gray-400" style={{ cursor: 'pointer' }} />
+                  <span>{selectedInstructor?.name || 'Loading...'}</span>
+                  <X className="h-4 w-4 text-gray-400" />
                 </div>
                 {isInstructorDropdownOpen && (
                   <div
@@ -202,15 +179,12 @@ export default function GymBookingForm() {
                     {instructorOptions.map((option) => (
                       <div
                         key={option.name}
-                        className={`p-2 cursor-pointer`}
+                        className="p-2 cursor-pointer"
                         onClick={() => selectInstructorOption(option.name)}
                         onMouseEnter={() => setHoveredInstructorOption(option.name)}
                         onMouseLeave={() => setHoveredInstructorOption(null)}
                         style={{
-                          cursor: 'pointer',
-                          backgroundColor:
-                            hoveredInstructorOption === option.name ? 'red' : 'transparent',
-                          color: 'black',
+                          backgroundColor: hoveredInstructorOption === option.name ? 'red' : 'transparent',
                         }}
                       >
                         {option.name}
@@ -219,17 +193,20 @@ export default function GymBookingForm() {
                   </div>
                 )}
               </div>
-              <div className="text-red-500 text-xs mt-1" style={{ cursor: 'default' }}>{selectedInstructor.specialty}</div>
+              {selectedInstructor && (
+                <div className="text-red-500 text-xs mt-1">{selectedInstructor.specialty}</div>
+              )}
+            </div>
+
+            {/* Date & Payment */}
+            <div>
+              <div className="text-sm mb-1">Start Date & Time</div>
+              <div className="text-red-500 text-sm">{startDate}</div>
+              <div className="text-red-500 text-sm">{startTime}</div>
             </div>
 
             <div>
-              <div className="text-sm mb-1" style={{ cursor: 'default' }}>Start Date & Time</div>
-              <div className="text-red-500 text-sm" style={{ cursor: 'default' }}>{startDate}</div>
-              <div className="text-red-500 text-sm" style={{ cursor: 'default' }}>{startTime}</div>
-            </div>
-
-            <div>
-              <div className="text-sm mb-2" style={{ cursor: 'default' }}>Payment Method</div>
+              <div className="text-sm mb-2">Payment Method</div>
               <div className="flex items-center">
                 <input
                   type="radio"
@@ -237,27 +214,26 @@ export default function GymBookingForm() {
                   value="Visa"
                   checked={paymentMethod === 'Visa'}
                   onChange={handlePaymentMethodChange}
-                  className="mr-2 cursor-pointer"
+                  className="mr-2"
                 />
-                <label htmlFor="visa" className="mr-4 cursor-pointer" style={{ cursor: 'pointer' }}>Visa</label>
+                <label htmlFor="visa" className="mr-4 cursor-pointer">Visa</label>
                 <input
                   type="radio"
                   id="cash"
                   value="Cash"
                   checked={paymentMethod === 'Cash'}
                   onChange={handlePaymentMethodChange}
-                  className="mr-2 cursor-pointer"
+                  className="mr-2"
                 />
-                <label htmlFor="cash" className="cursor-pointer" style={{ cursor: 'pointer' }}>Cash</label>
+                <label htmlFor="cash" className="cursor-pointer">Cash</label>
               </div>
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="text-xl font-bold" style={{ cursor: 'default' }}>{selectedPackage.price}EGP</div>
+              <div className="text-xl font-bold">{selectedPackage.price}EGP</div>
               <button
                 onClick={handleNext}
-                className="bg-red-500 text-white px-4 py-2 rounded-md text-sm cursor-pointer"
-                style={{ backgroundColor: 'red', color: 'white', cursor: 'pointer' }}
+                 className="bg-red-500 text-white px-4 py-2 rounded-md text-sm cursor-pointer"
               >
                 Book Now
               </button>
@@ -265,78 +241,52 @@ export default function GymBookingForm() {
           </div>
         )}
 
-        {/* Cash Payment Info Screen */}
         {showCashInfo && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold" style={{ cursor: 'default' }}>Payment Information</h2>
-            <div className="text-xl font-bold" style={{ cursor: 'default' }}>Total Cost: {selectedPackage.price}EGP</div>
-            <div className="text-sm" style={{ cursor: 'default' }}>Please pay at any of our branches.</div>
+            <h2 className="text-2xl font-bold">Payment Information</h2>
+            <div className="text-xl font-bold">Total Cost: {selectedPackage.price}EGP</div>
+            <div className="text-sm">Please pay at any of our branches.</div>
             <button
               onClick={handleConfirmCash}
-              className="bg-red-500 text-white px-4 py-2 rounded-md text-sm cursor-pointer"
-              style={{ cursor: 'pointer', backgroundColor: 'red', color: 'white' }}
+              className="bg-red-500 text-white px-4 py-2 rounded-md text-sm"
             >
               Confirm
             </button>
           </div>
         )}
 
-        {/* Frame 3: Visa Payment Info */}
         {currentFrame === 3 && paymentMethod === 'Visa' && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold" style={{ cursor: 'default' }}>Payment</h2>
-
-            <div>
-              <div className="text-sm mb-1" style={{ cursor: 'default' }}>Credit Card Number</div>
-              <input
-                type="text"
-                placeholder="XXXX XXXX XXXX XXXX"
-                className="w-full bg-white text-black p-2 rounded-md text-sm"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value)}
-                style={{ cursor: 'text' }}
-              />
-            </div>
-
-            <div>
-              <div className="text-sm mb-1" style={{ cursor: 'default' }}>Card Holder Name</div>
-              <input
-                type="text"
-                className="w-full bg-white text-black p-2 rounded-md text-sm"
-                value={cardHolder}
-                onChange={(e) => setCardHolder(e.target.value)}
-                style={{ cursor: 'text' }}
-              />
-            </div>
-
-            <div>
-              <div className="text-sm mb-1" style={{ cursor: 'default' }}>Expiration Date</div>
-              <input
-                type="text"
-                placeholder="MM/YY"
-                className="w-full bg-white text-black p-2 rounded-md text-sm"
-                value={expiryDate}
-                onChange={(e) => setExpiryDate(e.target.value)}
-                style={{ cursor: 'text' }}
-              />
-            </div>
-
-            <div>
-              <div className="text-sm mb-1" style={{ cursor: 'default' }}>CVV</div>
-              <input
-                type="text"
-                placeholder="XXX"
-                className="w-full bg-white text-black p-2 rounded-md text-sm"
-                value={cvv}
-                onChange={(e) => setCvv(e.target.value)}
-                style={{ cursor: 'text' }}
-              />
-            </div>
-
-            <button
-              className="bg-red-500 text-white px-4 py-2 rounded-md text-sm cursor-pointer"
-              style={{ backgroundColor: 'red', color: 'white', cursor: 'pointer' }}
-            >
+            <h2 className="text-2xl font-bold">Payment</h2>
+            <input
+              type="text"
+              placeholder="XXXX XXXX XXXX XXXX"
+              className="w-full bg-white text-black p-2 rounded-md text-sm"
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Card Holder"
+              className="w-full bg-white text-black p-2 rounded-md text-sm"
+              value={cardHolder}
+              onChange={(e) => setCardHolder(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="MM/YY"
+              className="w-full bg-white text-black p-2 rounded-md text-sm"
+              value={expiryDate}
+              onChange={(e) => setExpiryDate(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="CVV"
+              className="w-full bg-white text-black p-2 rounded-md text-sm"
+              value={cvv}
+              onChange={(e) => setCvv(e.target.value)}
+            />
+            <button className="bg-red-500 text-white px-4 py-2 rounded-md text-sm">
               Proceed To Pay
             </button>
           </div>
