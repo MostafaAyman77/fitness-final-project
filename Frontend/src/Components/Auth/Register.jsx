@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Alert, Card } from "react-bootstrap";
+import { Container, Form, Button, Alert } from "react-bootstrap";
 import fitMan from "../../Assets/images/fitman.png";
 import "./Styles.css";
 import { useNavigate } from "react-router-dom";
