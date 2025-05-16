@@ -3,40 +3,59 @@ import { Container, Form, Button, Alert } from "react-bootstrap";
 import fitMan from "../../Assets/images/fitman.png";
 import "./Styles.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const Register = ({ onSwitchMode }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    setError("");
-    if (!name || !email || !password || !confirmPassword) {
-      setError("All fields are required.");
-      return;
-    }
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
+  const handleRegister = async (e) => {
+  e.preventDefault();
+  setError("");
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const existingUser = users.find((u) => u.email === email);
+  if (!name || !email || !age || !password || !confirmPassword) {
+    setError("All fields are required.");
+    return;
+  }
 
-    if (existingUser) {
-      setError("Email already exists.");
-      return;
+  if (password !== confirmPassword) {
+    setError("Passwords do not match.");
+    return;
+  }
+
+   if (password.length < 8) {
+    setError("Password must be at least 8 characters long.");
+    return;
+  }
+   
+
+  try {
+    const response = await axios.post(`http://localhost:5000/users/register`, {
+      name,
+      email,
+      age : Number(age),
+      password,
+    });
+
+
+    if (response.status === 201) {
+      alert("Registration successful! Please login.");
+      navigate("/login");
     }
-
-    users.push({ name, email, password });
-    localStorage.setItem("users", JSON.stringify(users));
-    alert("Registration successful! Please login.");
-    navigate("/login");
-  };
+  } catch (err) {
+    if (err.response && err.response.data && err.response.data.message) {
+      setError(err.response.data.message);
+    } else {
+      setError("Registration failed. Please try again.");
+    }
+  }
+};
 
   return (
     <Container
@@ -68,7 +87,7 @@ const Register = ({ onSwitchMode }) => {
               onChange={(e) => setName(e.target.value)}
               style={{
                 backgroundColor: "#FFF",
-                color: "white",
+                color: "black",
                 borderColor: "#ccc",
               }}
             />
@@ -87,6 +106,22 @@ const Register = ({ onSwitchMode }) => {
                 borderColor: "#ccc",
               }}
             />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="age">
+            <Form.Label>Age</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Enter your Age"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              style={{
+                backgroundColor: "#FFF",
+                color: "black",
+                borderColor: "#ccc",
+              }}
+            />
+
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="password">
@@ -125,7 +160,7 @@ const Register = ({ onSwitchMode }) => {
             </Alert>
           )}
 
-          <Button variant="danger" type="submit" className="w-100 mt-3">
+          <Button variant="danger" onClick={handleRegister} className="w-100 mt-3">
             Register
           </Button>
 

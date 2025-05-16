@@ -8,7 +8,7 @@ router.get('/allUsers', getAllUsers);
 router.get('/:name', searchUser);
 
 // Route to add a new user
-router.post('/', addUser);
+router.post('/register', addUser);
 
 // Route to update an existing user
 router.put('/:id', updateUser);
