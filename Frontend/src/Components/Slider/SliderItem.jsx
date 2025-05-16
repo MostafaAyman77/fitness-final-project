@@ -14,7 +14,7 @@ export default function SliderItem({ items, number }) {
               <div className="bg-grey py-2 px-2.5 rounded-bottom-4">
                 <h4 className="text-white fw-bold ">{item.name}</h4>
                 <p className="text-light-grey fw-medium">{item.role}</p>
-                <Link to={`/coach/${item.id}`} className="text-white d-flex align-items-center gap-2 text-decoration-none position-relative">
+                <Link to={`/coach/${item._id}`} className="text-white d-flex align-items-center gap-2 text-decoration-none position-relative">
                   <span className="link-spotlight"></span>
                   <span>Learn More</span>
                   <FontAwesomeIcon icon={faArrowRightLong} className="text-red"/>
