@@ -1,9 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button, Table, Badge } from 'react-bootstrap';
 import { Diagram3Fill, Calendar3Week, Award, Speedometer } from 'react-bootstrap-icons';
 import GymTraining from '../../Assets/images/gym-training.png';
 
 const GymPlanProgram = () => {
+  const navigate = useNavigate();
+
+  const handleSelectPlan = (planTitle) => {
+    console.log("Selected plan:", planTitle);
+    navigate('/booking');
+  };
+
+  const handleGenericNavigate = () => {
+    console.log("Navigating to booking");
+    navigate('/booking');
+  };
+
   return (
     <div className="gym-plan-program py-5">
       <Container>
@@ -15,35 +28,51 @@ const GymPlanProgram = () => {
                 <Diagram3Fill className="me-2" />
                 Gym Plan
               </h1>
-              <p className="text-center text-light lead mb-4">Strategic programming to maximize your gym results</p>
+              <p className="text-center text-light lead mb-4">
+                Strategic programming to maximize your gym results
+              </p>
               <div className="position-relative z-index-1 text-center">
-                <Button variant="danger" size="lg" className="px-4">Get Your Personalized Plan</Button>
+                <Button 
+                  variant="danger" 
+                  size="lg" 
+                  className="px-4"
+                  onClick={handleGenericNavigate}
+                >
+                  Get Your Personalized Plan
+                </Button>
               </div>
             </div>
           </Col>
         </Row>
-        
+
         {/* Overview Section */}
         <Row className="mb-5 align-items-center text-light">
           <Col lg={6} className="mb-4 mb-lg-0">
             <h2>Structured Approach to Fitness</h2>
-            <p className="lead">Our Gym Plan is designed to help you make the most of your gym membership with strategic workouts organized for optimal results.</p>
-            <p>Whether you're new to the gym environment or a seasoned lifter looking for a fresh approach, our Gym Plan provides the structure and progression needed to achieve your fitness goals efficiently.</p>
-            
+            <p className="lead">
+              Our Gym Plan is designed to help you make the most of your gym membership with
+              strategic workouts organized for optimal results.
+            </p>
+            <p>
+              Whether you're new to the gym environment or a seasoned lifter looking for a fresh
+              approach, our Gym Plan provides the structure and progression needed to achieve your
+              fitness goals efficiently.
+            </p>
+
             <div className="d-flex flex-wrap mt-4">
               {[
                 {
                   icon: <Calendar3Week size={24} className="me-2 text-danger" />,
-                  text: 'Progressive 12-week cycles'
+                  text: 'Progressive 12-week cycles',
                 },
                 {
                   icon: <Speedometer size={24} className="me-2 text-danger" />,
-                  text: 'Intensity-based programming'
+                  text: 'Intensity-based programming',
                 },
                 {
                   icon: <Award size={24} className="me-2 text-danger" />,
-                  text: 'Goal-specific adaptations'
-                }
+                  text: 'Goal-specific adaptations',
+                },
               ].map((feature, index) => (
                 <div className="me-4 mb-3" key={index}>
                   <div className="d-flex align-items-center">
@@ -55,14 +84,10 @@ const GymPlanProgram = () => {
             </div>
           </Col>
           <Col lg={6}>
-            <img 
-              src={GymTraining} 
-              alt="Gym Training" 
-              className="img-fluid rounded shadow" 
-            />
+            <img src={GymTraining} alt="Gym Training" className="img-fluid rounded shadow" />
           </Col>
         </Row>
-        
+
         {/* Plan Options Section */}
         <Row className="mb-5">
           <Col>
@@ -71,41 +96,44 @@ const GymPlanProgram = () => {
               {[
                 {
                   title: 'Beginner',
-                  description: 'Perfect for those new to the gym environment focusing on form and building confidence',
+                  description:
+                    'Perfect for those new to the gym environment focusing on form and building confidence',
                   features: [
                     'Full gym orientation',
                     'Form-focused exercises',
                     'Progressive loading introduction',
-                    'Machine to free weight transition'
+                    'Machine to free weight transition',
                   ],
                   price: '$49',
-                  color: 'success'
+                  color: 'success',
                 },
                 {
                   title: 'Intermediate',
-                  description: 'For those familiar with gym basics ready to increase intensity and challenge',
+                  description:
+                    'For those familiar with gym basics ready to increase intensity and challenge',
                   features: [
                     'Periodized training cycles',
                     'Split routine introduction',
                     'Advanced exercise variations',
-                    'Nutrition guidelines'
+                    'Nutrition guidelines',
                   ],
                   price: '$79',
                   color: 'warning',
-                  featured: true
+                  featured: true,
                 },
                 {
                   title: 'Advanced',
-                  description: 'Designed for experienced lifters seeking to break plateaus and maximize results',
+                  description:
+                    'Designed for experienced lifters seeking to break plateaus and maximize results',
                   features: [
                     'Complex programming methods',
                     'Specialized training techniques',
                     'Performance optimization',
-                    'Recovery protocols'
+                    'Recovery protocols',
                   ],
                   price: '$99',
-                  color: 'danger'
-                }
+                  color: 'danger',
+                },
               ].map((plan, index) => (
                 <Col md={4} className="mb-4" key={index}>
                   <Card className={`h-100 shadow ${plan.featured ? 'border-danger' : ''}`}>
@@ -124,12 +152,15 @@ const GymPlanProgram = () => {
                       <hr />
                       <ul className="list-unstyled text-start mb-4">
                         {plan.features.map((feature, i) => (
-                          <li key={i} className="mb-2">✓ {feature}</li>
+                          <li key={i} className="mb-2">
+                            ✓ {feature}
+                          </li>
                         ))}
                       </ul>
-                      <Button 
-                        variant={plan.featured ? 'danger' : 'outline-dark'} 
+                      <Button
+                        variant={plan.featured ? 'danger' : 'outline-dark'}
                         className="w-100"
+                        onClick={() => handleSelectPlan(plan.title)}
                       >
                         Select Plan
                       </Button>
@@ -140,7 +171,7 @@ const GymPlanProgram = () => {
             </Row>
           </Col>
         </Row>
-        
+
         {/* Sample Workout Schedule */}
         <Row className="mb-5 bg-dark text-light p-4 rounded shadow-sm">
           <Col>
@@ -163,65 +194,25 @@ const GymPlanProgram = () => {
                     <Badge bg="danger">High</Badge>
                   </td>
                 </tr>
-                <tr>
-                  <td className="fw-bold">Tuesday</td>
-                  <td>Pull Day (Back, Biceps)</td>
-                  <td>Rows, Pull-ups, Bicep Curls</td>
-                  <td>
-                    <Badge bg="danger">High</Badge>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="fw-bold">Wednesday</td>
-                  <td>Leg Day</td>
-                  <td>Squats, Deadlifts, Lunges</td>
-                  <td>
-                    <Badge bg="danger">High</Badge>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="fw-bold">Thursday</td>
-                  <td>Active Recovery</td>
-                  <td>Mobility Work, Light Cardio</td>
-                  <td>
-                    <Badge bg="success">Low</Badge>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="fw-bold">Friday</td>
-                  <td>Upper Body</td>
-                  <td>Incline Press, Pull-downs, Lateral Raises</td>
-                  <td>
-                    <Badge bg="warning">Medium</Badge>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="fw-bold">Saturday</td>
-                  <td>Lower Body</td>
-                  <td>Romanian Deadlifts, Leg Press, Calf Raises</td>
-                  <td>
-                    <Badge bg="warning">Medium</Badge>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="fw-bold">Sunday</td>
-                  <td>Rest Day</td>
-                  <td>Complete Rest</td>
-                  <td>
-                    <Badge bg="secondary">None</Badge>
-                  </td>
-                </tr>
+                {/* Add additional rows as needed */}
               </tbody>
             </Table>
           </Col>
         </Row>
-        
+
         {/* CTA Section */}
         <Row className="bg-dark text-white p-5 rounded shadow text-center">
           <Col>
             <h2 className="mb-4">Ready to Maximize Your Gym Results?</h2>
-            <p className="lead mb-4">Get a professionally designed plan tailored to your goals and experience level</p>
-            <Button variant="danger" size="lg" className="px-5">
+            <p className="lead mb-4">
+              Get a professionally designed plan tailored to your goals and experience level
+            </p>
+            <Button
+              variant="danger"
+              size="lg"
+              className="px-5"
+              onClick={handleGenericNavigate}
+            >
               Start Your Gym Plan Today
             </Button>
           </Col>

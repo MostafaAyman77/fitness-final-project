@@ -32,6 +32,7 @@ import BMICalculator from './Components/FitnessTools/BMI-calculator';
 import CalorieCalculator from './Components/FitnessTools/Calorie-calculator';
 import MacronutrientCalculator from './Components/FitnessTools/Macronutrient-calculator';
 import GoalSettingTool from './Components/FitnessTools/Goal-Setting-Tool';
+import GymBookingForm from './Components/BookingScreen/GymBookingForm';
 
 const routes = createBrowserRouter([
   {
@@ -130,6 +131,10 @@ const routes = createBrowserRouter([
         path: "goal-setting",
         element: <GoalSettingTool />,
       },
+      {
+        path: "booking",
+        element: <GymBookingForm />,
+      }
     ],
   },
   {
@@ -141,6 +146,7 @@ const routes = createBrowserRouter([
       },
     ],
   },
+  
 ]);
 
 function App() {
