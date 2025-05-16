@@ -1,50 +1,112 @@
-// src/components/Auth/Login.jsx
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import './auth.css'; // استيراد ملف الـ CSS
-
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import React, { useState } from "react";
+import { Container, Form, Button, Card, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import "./Styles.css";
+import fitMan from "../../Assets/images/fitman.png";
+const Login = ({ onSwitchMode }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    setError("");
+
+    if (!email || !password) {
+      setError("Email and password are required.");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (user) {
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      navigate("/");
+    } else {
+      setError("Invalid email or password.");
+    }
   };
 
   return (
-    <div className="container">
-      <h2>Login</h2>
-      <div className="input-box">
-        <FontAwesomeIcon icon={faEnvelope} className="icon" />
-        <input 
-          type="email" 
-          placeholder="Enter Your E-Mail" 
-          value={email}
-          onChange={(e) => setEmail(e.target.value)} 
-        />
+    <Container className="main-login d-flex justify-content-center align-items-center w-100 min-vh-100">
+      <div
+        className="login p-4"
+        style={{
+          width: "",
+          maxWidth: "500px",
+          backgroundColor: "rgba(96, 0, 0, 0.85)",
+          color: "white",
+        }}
+      >
+        <h2 className="text-center mb-4">Login FitMaker</h2>
+        <Form onSubmit={handleLogin} className="main-form">
+          <Form.Group controlId="email" className="mb-3">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{
+                backgroundColor: "#FFF",
+                color: "black",
+                borderColor: "#ccc",
+              }}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="password" className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{
+                backgroundColor: "#FFF",
+                color: "black",
+                borderColor: "#ccc",
+              }}
+            />
+          </Form.Group>
+
+          {error && (
+            <Alert variant="danger" className="text-center">
+              {error}
+            </Alert>
+          )}
+
+          <Button variant="danger" type="submit" className="w-100 mt-2">
+            Login
+          </Button>
+
+          <div className="text-center mt-3">
+            <span style={{ color: "#ccc" }}>
+              Don't have an account?{" "}
+              <span
+                style={{
+                  cursor: "pointer",
+                  color: "#fff",
+                  textDecoration: "underline",
+                }}
+                onClick={() => onSwitchMode("register")}
+              >
+                Register
+              </span>
+            </span>
+          </div>
+        </Form>
       </div>
-      <div className="input-box">
-        <FontAwesomeIcon icon={faLock} className="icon" />
-        <input 
-          type="password" 
-          placeholder="Enter Your Password" 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} 
-        />
+
+      <div className="hero-image-container">
+        <img src={fitMan} alt="Fit Man" />
       </div>
-      <button className="btn" onClick={handleLogin}>Login</button>
-      <div className="or-line">
-        <span>Or</span>
-      </div>
-      <button className="google-btn">
-        <FontAwesomeIcon icon={faGoogle} />
-        Login with Google
-      </button>
-    </div>
+    </Container>
   );
-}
+};
 
 export default Login;

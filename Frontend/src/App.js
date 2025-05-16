@@ -9,7 +9,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Login from "./Components/Auth/Login";
-import SignUp from "./Components/Auth/signup";
 import Layout from "./Components/Layout";
 import DashboardHome from "./Components/Dashboard/DashboardHome/DashboardHome";
 import OurPlans from "./Components/PlanSection/OurPlans";
@@ -31,6 +30,7 @@ import BMICalculator from './Components/FitnessTools/BMI-calculator';
 import CalorieCalculator from './Components/FitnessTools/Calorie-calculator';
 import MacronutrientCalculator from './Components/FitnessTools/Macronutrient-calculator';
 import GoalSettingTool from './Components/FitnessTools/Goal-Setting-Tool';
+import Register from "./Components/Auth/Register";
 import CoachWrapper from "./Components/CoachWrapper";
 
 const routes = createBrowserRouter([
@@ -44,16 +44,15 @@ const routes = createBrowserRouter([
       },
       {
         path: "coach/:id",
-        element: <CoachWrapper />,
+        element: <Coach />,
       },
       {
         path: "login",
         element: <Login />,
       },
-      {
-        path: "signup",
-        element: <SignUp />,
-      },
+      {  
+        path: "register",  
+        element: <Register />},
       {
         path: "our-plans",
         element: <OurPlans />,
