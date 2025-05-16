@@ -133,7 +133,7 @@ const Register = ({ onSwitchMode }) => {
             <span style={{ color: "#ccc" }}>
               Already have an account?{" "}
               <span
-                onClick={() => onSwitchMode("login")}
+                 onClick={() => navigate("/login")}
                 style={{
                   color: "#fff",
                   cursor: "pointer",

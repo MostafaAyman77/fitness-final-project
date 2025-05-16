@@ -9,6 +9,14 @@ import "../Header/styles.css";
 
 const FitMakerHeader = () => {
   const location = useLocation();
+  
+  // Define paths where the Navbar should be hidden
+  const hiddenPaths = ["/login", "/register"];
+
+  // If current path matches, don't render the navbar
+  if (hiddenPaths.includes(location.pathname)) {
+    return null;
+  }
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="py-2">
       <Container>

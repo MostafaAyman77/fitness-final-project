@@ -93,8 +93,7 @@ const Login = ({ onSwitchMode }) => {
                   color: "#fff",
                   textDecoration: "underline",
                 }}
-                onClick={() => onSwitchMode("register")}
-              >
+                  onClick={() => navigate("/register")}              >
                 Register
               </span>
             </span>
