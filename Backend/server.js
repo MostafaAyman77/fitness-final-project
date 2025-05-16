@@ -6,6 +6,7 @@ import reviewRoutes from './Routes/reviews.routes.js';
 import membershipRoutes from './Routes/membership.routes.js';
 import membershipBenefitsRoutes from './Routes/membership_benefits.routes.js';
 import fitnessToolsRoutes from './Routes/fitnessTools.routes.js';
+import trainerRoutes from './Routes/trainer.routes.js';
 import cors from 'cors';
 
 dotenv.config(); // Load environment variables from .env file
@@ -26,6 +27,7 @@ app.use('/review', reviewRoutes);
 app.use('/membership', membershipRoutes);
 app.use('/membershipBenefits', membershipBenefitsRoutes);
 app.use('/fitnessTools', fitnessToolsRoutes);
+app.use('/trainers', trainerRoutes);
 
 const PORT = process.env.PORT || 5000;
 

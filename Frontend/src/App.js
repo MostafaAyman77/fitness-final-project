@@ -8,7 +8,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Coach from "./Pages/Home/CoachScreen/Coach";
 import Login from "./Components/Auth/Login";
 import SignUp from "./Components/Auth/signup";
 import Layout from "./Components/Layout";
@@ -32,6 +31,7 @@ import BMICalculator from './Components/FitnessTools/BMI-calculator';
 import CalorieCalculator from './Components/FitnessTools/Calorie-calculator';
 import MacronutrientCalculator from './Components/FitnessTools/Macronutrient-calculator';
 import GoalSettingTool from './Components/FitnessTools/Goal-Setting-Tool';
+import CoachWrapper from "./Components/CoachWrapper";
 
 const routes = createBrowserRouter([
   {
@@ -44,7 +44,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "coach/:id",
-        element: <Coach />,
+        element: <CoachWrapper />,
       },
       {
         path: "login",
