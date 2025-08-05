@@ -33,6 +33,7 @@ import GoalSettingTool from './Components/FitnessTools/Goal-Setting-Tool';
 import GymBookingForm from './Components/BookingScreen/GymBookingForm';
 import Register from "./Components/Auth/Register";
 import CoachWrapper from "./Components/CoachWrapper";
+import UserProfile from "./Components/UserProfile/UserProfile";
 
 const routes = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const routes = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "profile",
+        element: <UserProfile />,
       },
       {
         path: "coach/:id",

@@ -25,14 +25,18 @@ const AchievementCard = ({achievement}) => {
             </div>
             <CardContent>
                 <Typography sx={{color: "var(--red-main-color)"}} gutterBottom variant="h5" component="div">
-                    {achievement.name}
+                    {achievement.title}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "var(--white-color)"}}>
-                    {achievement.desc}
+                    {achievement.description}
                 </Typography>
+                <Typography variant="caption" sx={{ color: "gray" }}>
+                  {new Date(achievement.date).toLocaleDateString()}
+                </Typography>
+                
             </CardContent>
             <CardActions>
-                <Button sx={{color: "var(--white-color)",backgroundColor: "var(--red-main-color)", padding:1, textTransform: "none" }} size="small">Learn More</Button>
+                <Button sx={{color: "var(--white-color)",backgroundColor: "var(--red-main-color)", padding:1, textTransform: "none" }} size="small">View Certificate</Button>
             </CardActions>
         </Card>
         );

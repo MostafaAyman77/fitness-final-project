@@ -1,39 +1,36 @@
-import { Schema, model } from 'mongoose';
+import mongoose from 'mongoose';
 
-const userSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        minLength: 3,
-        trim: true,
-    },
-    age: {
-        type: Number,
-        required: true,
-        min: 0,
-        max: 120,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-    },
-    password: {
-        type: String,
-        required: true,
-        minLength: 8,
-    },
-    isCoach: {
-        type: Boolean,
-        default: false,
-    },
-})
+const UserSchema = new mongoose.Schema({
+  email: String,
+  password: String,
+  age: Number,  
+  name: String,
+  gender: String,
+  level: Number,
+  xp: Number,
+  xpToNext: Number,
+  streak: Number,
+  totalWorkouts: Number,
+  stats: {
+    caloriesBurned: Number,
+    stepsToday: Number,
+    heartRate: Number,
+    workoutTime: Number
+  },
+  weeklyProgress: [{
+    day: String,
+    calories: Number,
+    steps: Number
+  }],
+  achievements: [{
+    id: Number,
+    name: String,
+    desc: String,
+    icon: String,
+    unlocked: Boolean
+  }]
+});
 
+const User = mongoose.model('User', UserSchema);
 
-const User = model('User', userSchema);
 export default User;

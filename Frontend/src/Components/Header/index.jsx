@@ -97,6 +97,9 @@ const FitMakerHeader = () => {
             <Nav.Link as={Link} to="/about-us" className={`mx-5 ${location.pathname === "/about-us" ? "border-bottom border-danger" : "text-white-50"}`}>
               About Us
             </Nav.Link>
+            <Nav.Link as={Link} to="/profile" className={`mx-5 ${location.pathname === "/profile" ? "border-bottom border-danger" : "text-white-50"}`}>
+              My Profile
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

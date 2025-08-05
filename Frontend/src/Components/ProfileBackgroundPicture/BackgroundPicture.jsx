@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'react-bootstrap/Image';
-import Photo from "../../Assets/images/service-1.jpg"
+import Photo from "../../Assets/images/cover-photo.png"
 import styles from "./backgroundPicture.module.css"
 
 const BackgroundPicture = () => {

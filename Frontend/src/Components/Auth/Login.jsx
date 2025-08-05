@@ -37,13 +37,7 @@ const Login = () => {
       return;
     }
 
-    
-
     localStorage.setItem("user", JSON.stringify(user));
-
-    // Optional: store user info in app state or context
-    // Example: setCurrentUser(user); if using context
-
     navigate("/");
   } catch (err) {
     console.error(err);
